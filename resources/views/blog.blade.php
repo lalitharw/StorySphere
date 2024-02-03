@@ -14,7 +14,7 @@
           <span>All posts</span>
         </h1>
         <ul class="list-inline breadcrumb-menu mb-3">
-          <li class="list-inline-item"><a href='/qurno/'><i class="ti ti-home"></i>  <span>Home</span></a></li>
+          <li class="list-inline-item"><a href='{{url("/")}}'><i class="ti ti-home"></i>  <span>Home</span></a></li>
           <li class="list-inline-item">• &nbsp; <a href='/qurno/blog'><span>All posts</span></a></li>
         </ul>
       </div>

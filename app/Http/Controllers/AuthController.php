@@ -26,7 +26,11 @@ class AuthController extends Controller
         $user->password = Hash::make($request->password);
         $res = $user->save();
 
-        if($res){
+        if(Session()->has("redirect_to_author_page")){
+            return redirect()->route("author")-with("message","Registered Successfully!!");
+        }
+
+        else if($res){
             return redirect()->route("login")->with("message","Account Created Successfully! Login");
         }
         else{
@@ -59,5 +63,16 @@ class AuthController extends Controller
             Session()->pull("loginid");
             return redirect()->route("login");
         }
+    }
+
+    public function author(){
+        if(Session()->has("loginid")){
+            return redirect("/author");
+        }
+        else{
+           
+            return redirect("/signup")->with(["message"=>"To become an Author you need to create an account","redirect_to_author_page"=>true]);
+        }
+       
     }
 }

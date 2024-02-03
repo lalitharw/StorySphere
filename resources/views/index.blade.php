@@ -55,7 +55,7 @@
             <ul class="card-meta list-inline mb-3">
               <li class="list-inline-item mt-2">
                 <i class="ti ti-calendar-event"></i>
-                <span>05 Dec, 2021</span>
+                <span>{{$blog->created_at}}</span>
               </li>
               <li class="list-inline-item mt-2">—</li>
               <li class="list-inline-item mt-2">
