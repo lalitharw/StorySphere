@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\user;
 use Illuminate\Contracts\Session\Session;
-
+ 
 class AuthController extends Controller
 {
     public function loginPage(){
