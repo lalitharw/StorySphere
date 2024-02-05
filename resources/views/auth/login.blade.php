@@ -7,7 +7,7 @@
 @section("main-section")
 <div class="container mt-4" style="height:70vh">
     <div class="row d-flex justify-content-center">
-        <div class="col-4 col-sm-10">
+        <div class=" col-sm-10">
             <h2>Login</h2>
             @if(Session::has("message"))
                 <p>

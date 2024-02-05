@@ -21,6 +21,10 @@
 
   <!-- Main Stylesheet -->
   <link rel="stylesheet" href="{{url("assets/css/style.css")}}">
+
+  {{-- adding toastify.js --}}
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 <body>
 
@@ -57,19 +61,17 @@
               <li class="nav-item {{(request()->url()== url("/blogs"))?"active":""}}">
                 <a class='nav-link' href='{{url("blogs")}}'>Blogs</a>
               </li>
-             <li class="nav-item">
-              {{-- <a href="{{Session::has("loginid")?"w":"f"}}" class="btn btn-primary"><i class="ti ti-log-in me-2"></i>{{Session::get("loginid")?"logout":"login"}}</a> --}}
+             {{-- <li class="nav-item">
               @if (Session::has("loginid"))
               
                 <form action="{{route("logout")}}" method="post">
                   @csrf
-                  {{-- <input  class="btn btn-primary" type="submit" value="Logout"> --}}
                   <button  class="btn btn-primary"><i class="ti ti-logout"></i> Logout</button>
                 </form>
               @else
                 <a class="btn btn-primary" href="{{url("/login")}}" class="btn btn-primary"><i class="ti ti-login me-2"></i>Login</a>
               @endif
-             </li>
+             </li> --}}
             </ul>
             
             
@@ -80,6 +82,31 @@
                     <span>Search</span>
                     <svg width="22" height="22" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.5 15.5L19 19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 11C5 14.3137 7.68629 17 11 17C12.6597 17 14.1621 16.3261 15.2483 15.237C16.3308 14.1517 17 12.654 17 11C17 7.68629 14.3137 5 11 5C7.68629 5 5 7.68629 5 11Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
                   </button>
+                </li>
+                @if(Session::has("data"))
+                <li class="nav-item list-inline-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Hello, {{Session::get("data")}}
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
+                   
+                    <li class="dropdown-item">
+                      
+                      <form class="text-center" action="{{route("logout")}}" method="post">
+                        @csrf
+                        {{-- < href="" ><i class="ti ti-logout"></i> Logout</a> --}}
+                        <button class="btn btn-primary"><i class="ti ti-logout"></i> Logout</a>
+                      </form>
+                 
+                      
+                 </li>
+                </li>
+                @else
+                      <a href="{{url("/login")}}" class="text-white btn btn-primary"><i class="ti ti-login me-2"></i>Login</a>
+                    @endif    
+                
+             
+                  </ul>
                 </li>
               </ul>
             </div>

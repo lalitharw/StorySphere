@@ -61,6 +61,7 @@ class AuthController extends Controller
     public function logout(){
         if(Session()->has("loginid")){
             Session()->pull("loginid");
+            Session()->flush();
             return redirect()->route("login");
         }
     }
