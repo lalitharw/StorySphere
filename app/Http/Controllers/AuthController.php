@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\user;
-use Illuminate\Contracts\Session\Session;
- 
+use App\Models\Author;
+
 class AuthController extends Controller
 {
     public function loginPage(){
@@ -21,21 +21,29 @@ class AuthController extends Controller
         $user = new user();
         $user->firstname = $request->firstname;
         $user->lastname= $request->lastname;
-        $user->avatar = $request->avatar;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $res = $user->save();
-
+        if($res){
         if(Session()->has("redirect_to_author_page")){
-            return redirect()->route("author")-with("message","Registered Successfully!!");
+        
+            // return redirect()->route("author")->with("message","Registered Successfully!!");
+            return view("auth.authorPage")->with("message","Registered Successfully! Fill your details");
+        }
+        else if($res){
+            return redirect('/login')->with("message","Registered Successfully! Log In");
         }
 
-        else if($res){
-            return redirect()->route("login")->with("message","Account Created Successfully! Login");
-        }
+    }
         else{
             return back()->with("message","Something went wrong");
         }
+
+        
+       
+    
+
+   
 
 
     }
@@ -60,20 +68,36 @@ class AuthController extends Controller
 
     public function logout(){
         if(Session()->has("loginid")){
-            Session()->pull("loginid");
+            // Session()->pull("loginid");
             Session()->flush();
+            // will delete all session 
             return redirect()->route("login");
         }
     }
 
     public function author(){
         if(Session()->has("loginid")){
-            return redirect("/author");
+            return view("auth.authorPage");
         }
         else{
-           
-            return redirect("/signup")->with(["message"=>"To become an Author you need to create an account","redirect_to_author_page"=>true]);
+            Session()->put("redirect_to_author_page",true);
+            return redirect()->route("signup")->with("message","To become an Author you need to create an account");
         }
        
+    }
+
+    public function storeAuthor(Request $request){
+        $author = new Author();
+
+        $author->avatar = $request->avatar;
+        $author->description = $request->desc;
+        $author->user_id = $request->user_id;
+
+        $res = $author->save();
+
+        if($res){
+
+        }
+
     }
 }
