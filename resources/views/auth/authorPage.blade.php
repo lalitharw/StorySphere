@@ -1,31 +1,30 @@
 @extends("layouts.main")
 
 @section("title")
-    Login
+    Author Details
 @endsection
 
 @section("main-section")
 <div class="container mt-4" style="height:70vh">
     <div class="row d-flex justify-content-center">
-        <div class="col-4 col-sm-10">
-            <h2>Login</h2>
-            @if(Session::has("message"))
-                <p>
-                    {{Session::get("message")}}
-                </p>
-                
-            @endif
-<form action="{{route("loginuser")}}" method="POST">
+        <div class=" col-sm-10">
+            <h2>Author Details</h2>
+          
+<form action="{{route("authorStore")}}" method="POST">
     @csrf
     <div class="form-group">
-      <label for="email">Email address:</label>
-      <input type="email" name="email" class="form-control" placeholder="Enter email" id="email">
+      <label for="email">Email:</label>
+      <input type="file" name="avatar" class="form-control" placeholder="Select Profile Image" id="file">
     </div>
     <br>
     <div class="form-group">
-      <label for="pwd">Password:</label>
-      <input type="password" name="password" class="form-control" placeholder="Enter password" id="pwd">
+      <label for="pwd">Description:</label>
+      <textarea  rows="5" name="desc" class="form-control" placeholder="Enter your Description" id="desc"></textarea>
     </div>
+
+    {{-- <input type="hidden" name="user_id" value="{{$user_id}}" > --}}
+
+   
     <br>
     <button type="submit" class="btn btn-primary mb-2">Submit</button>
     

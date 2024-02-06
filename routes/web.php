@@ -25,3 +25,4 @@ Route::post("/loginuser",[AuthController::class,'loginUser'])->name("loginuser")
 Route::post("/logout",[AuthController::class,"logout"])->name("logout");
 Route::get("/specific-blog/{id}",[BlogsController::class,"SingleBlogs"])->name("singleblog");
 Route::get("/author",[AuthController::class,"author"])->name("author");
+Route::post("/authorStore",[AuthController::class,"storeAuthor"])->name("authorStore");

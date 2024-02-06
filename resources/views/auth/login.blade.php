@@ -9,12 +9,7 @@
     <div class="row d-flex justify-content-center">
         <div class=" col-sm-10">
             <h2>Login</h2>
-            @if(Session::has("message"))
-                <p>
-                    {{Session::get("message")}}
-                </p>
-                
-            @endif
+           
 <form action="{{route("loginuser")}}" method="POST">
     @csrf
     <div class="form-group">
@@ -34,4 +29,25 @@
 </div>
 </div>
 </div>
+@endsection
+
+@section("scripts")
+
+@if(Session::has("message"))
+Toastify({
+  text: "{{Session::get('message')}}",
+  duration: 3000,
+  close: true,
+  gravity: "top", // `top` or `bottom`
+  position: "center", // `left`, `center` or `right`
+  stopOnFocus: true, // Prevents dismissing of toast on hover
+  style: {
+    background: "linear-gradient(to right, #f08e80, #f08e80)",
+    color:"#fff",
+   
+  },
+  
+}).showToast();
+    
+@endif
 @endsection

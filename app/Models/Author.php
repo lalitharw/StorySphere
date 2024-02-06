@@ -5,19 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class blogs extends Model
+class Author extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'title',
+        "avatar",
         "description",
-        "is_featured",
-        "tags",
-        "authorId"
+        "user_id"
     ];
 
-    public function author(){
-        return $this->belongsTo(Author::class,"authorId");
+    public function User(){
+        return $this->belongsTo(User::class,"user_id");
     }
 }

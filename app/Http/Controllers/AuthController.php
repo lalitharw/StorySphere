@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\user;
 use App\Models\Author;
+use Illuminate\Contracts\Session\Session;
 
 class AuthController extends Controller
 {
@@ -24,9 +25,12 @@ class AuthController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $res = $user->save();
+        
         if($res){
         if(Session()->has("redirect_to_author_page")){
-        
+            
+            Session()->pull("redirect_to_author_page");
+            
             // return redirect()->route("author")->with("message","Registered Successfully!!");
             return view("auth.authorPage")->with("message","Registered Successfully! Fill your details");
         }
@@ -38,22 +42,22 @@ class AuthController extends Controller
         else{
             return back()->with("message","Something went wrong");
         }
-
-        
-       
-    
-
-   
-
-
     }
 
     public function loginUser(Request $request){
         $user = user::where("email","=",$request->email)->first();
+        $is_author = Author::where("user_id",$user->id)->first();
+        // return response([$user,$is_author]);
         if($user){
             if(!Hash::check($request->password,$user->password)){
-                $request->Session()->put("loginid",$user);
+                if($is_author){
+                $request->Session()->put(["loginid"=>$user,"is_author"=>true]);
+                }
+                else{
+                    $request->Session()->put("loginid",$user); 
+                }
                 return redirect()->route("home");
+
             }
             else{
                 return back()->with("message","User not found");
@@ -87,16 +91,22 @@ class AuthController extends Controller
     }
 
     public function storeAuthor(Request $request){
-        $author = new Author();
 
+
+        $author = new Author();
+        $user = Session()->get("loginid");
+        $user_id = $user->id;
         $author->avatar = $request->avatar;
         $author->description = $request->desc;
-        $author->user_id = $request->user_id;
-
+        $author->user_id = $user_id;
+       
         $res = $author->save();
 
         if($res){
-
+            return redirect("/login")->with("message","Author Details SuccessFul!! Login in");
+        }
+        else{
+            return back()->with("message","something went wrong");
         }
 
     }
