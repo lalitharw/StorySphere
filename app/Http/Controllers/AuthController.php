@@ -47,11 +47,12 @@ class AuthController extends Controller
     public function loginUser(Request $request){
         $user = user::where("email","=",$request->email)->first();
         $is_author = Author::where("user_id",$user->id)->first();
-        // return response([$user,$is_author]);
+        $author_id = $is_author->author_id;
+        // return response([$user,$author_id]);
         if($user){
             if(!Hash::check($request->password,$user->password)){
                 if($is_author){
-                $request->Session()->put(["loginid"=>$user,"is_author"=>true]);
+                $request->Session()->put(["loginid"=>$user,"is_author"=>$author_id]);
                 }
                 else{
                     $request->Session()->put("loginid",$user); 
@@ -110,4 +111,6 @@ class AuthController extends Controller
         }
 
     }
+
+    
 }

@@ -26,3 +26,5 @@ Route::post("/logout",[AuthController::class,"logout"])->name("logout");
 Route::get("/specific-blog/{id}",[BlogsController::class,"SingleBlogs"])->name("singleblog");
 Route::get("/author",[AuthController::class,"author"])->name("author");
 Route::post("/authorStore",[AuthController::class,"storeAuthor"])->name("authorStore");
+Route::get("/publish",[BlogsController::class,"publishPage"])->name("publish");
+Route::post("/storeblog",[BlogsController::class,"storePublishBlog"])->name("storeBlog");

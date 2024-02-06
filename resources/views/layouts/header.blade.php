@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Crete+Round&family=Work+Sans:wght@500;600&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="{{asset("plugins/bootstrap/bootstrap.min.css")}}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/1.35.0/iconfont/tabler-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
 
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="{{url("assets/css/style.css")}}">
@@ -69,7 +69,7 @@
                                 <li class="nav-item {{(request()->url()== url("/author"))?"active":""}}">
                                     <a class='nav-link' href='{{url("author")}}'>Become an Author</a>
                                 </li>
-                                @else
+                               
                                 @endif
 
                                 {{-- <li class="nav-item">
@@ -106,15 +106,19 @@
 
                                             @if(Session::has("is_author"))
                                             <li class="dropdown-item">
-                                                publish new post
+                                              <a href="{{route("publish")}}">
+                                              <i class="ti ti-notebook"></i> Publish New Blog
+                                            </a>
                                             </li>
                                             <li class="dropdown-item">
-                                                Jell oworld
+                                              <a>
+                                              <i class="ti ti-focus-centered"></i> Manage Blogs
+                                              </a>
                                             </li>
                                             @endif
                                             <li class="dropdown-item">
 
-                                                <form class="text-center" action="{{route(" logout")}}" method="post">
+                                                <form class="text-center" action="{{route("logout")}}" method="post">
                                                     @csrf
                                                     {{-- < href=""><i class="ti ti-logout"></i> Logout</a> --}}
                                                     <button class="btn btn-primary"><i class="ti ti-logout"></i> Logout</a>

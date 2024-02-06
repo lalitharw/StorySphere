@@ -8,9 +8,7 @@
 <div class="container mt-4" style="min-height:70vh">
     <div class="row d-flex justify-content-center">
         <div class="col-10 ">
-            <h2>Sign Up @if (Session::has("redirect_to_author_page"))
-              <p>adakd</p>
-            @endif</h2>
+            <h2>Sign Up</h2>
            
 <form action="{{route("register")}}" method="POST">
     @csrf
