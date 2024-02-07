@@ -10,11 +10,11 @@
     <div class="row justify-content-center">
       <div class="col-lg-10">
         <div class="mb-5">
-          <h3 class="h1 mb-4 post-title">What does it take to create an object that travels at 1% the speed of light?</h3>
+          <h3 class="h1 mb-4 post-title">{{$blogs->title}}</h3>
 
           <ul class="card-meta list-inline mb-2">
             <li class="list-inline-item mt-2">
-              <a class='card-meta-author' href='/qurno/author-single' title='Read all posts by - Thomas Macaulay'>
+              <a class='card-meta-author' href='{{url("/author/{$blogs->authorId}")}}' title='Read all posts by - Thomas Macaulay'>
                 <img class="w-auto" src="assets/images/author/thomas-macaulay.jpg" alt="Thomas Macaulay" width="26" height="26"> by <span>Thomas Macaulay</span>
               </a>
             </li>
@@ -90,8 +90,8 @@
             </a>
             <div class="ms-0 ms-md-4 ps-0 ps-md-3 mt-4 mt-md-0">
               <h3 class="h4 mb-3"><a class='text-dark' href='/qurno/author-single'>Thomas Macaulay</a></h3>
-              <p>Chris Impey is a writer based in New York City. He's interested in all things tech, science, and photography related, and likes to yo-yo in his free time. …</p>
-              <div class="content"><a href='/qurno/author-single'>See all posts by this author <i class="ti ti-arrow-up-right"></i></a></div>
+              <p>{{$blogs->description}}</p>
+              <div class="content"><a href='{{url("/author/{$blogs->authorId}")}}'>See all posts by this author <i class="ti ti-arrow-up-right"></i></a></div>
             </div>
           </div>
         </div>
@@ -100,7 +100,7 @@
 
     
   
-    
+    {{-- this is footer blog maybe i can add more logic  --}}
     <div class="single-post-similer">
       <div class="row justify-content-center">
         <div class="col-lg-12">
@@ -111,13 +111,13 @@
           </div>
           <div class="row gy-5 gx-4 g-xl-5">
             
-              
+            @foreach ($footerBlogs as $footer)
             <div class="col-lg-6">
               <article class="card post-card h-100 border-0 bg-transparent">
                 <div class="card-body">
-                  <a class='d-block' href='/qurno/blog-single' title='Everything you wanted to know about the metaverse'>
+                  <a class='d-block' href='{{url("specific-blog/{$footer->id}")}}' title='{{$footer->title}}'>
                     <div class="post-image position-relative">
-                      <img class="w-100 h-auto rounded" src="assets/images/blog/04.jpg" alt="Everything you wanted to know about the metaverse" width="970" height="500">
+                      <img class="w-100 h-auto rounded" src="assets/images/blog/04.jpg" alt="{{$footer->title}}" width="970" height="500">
                     </div>
                   </a>
                   <ul class="card-meta list-inline mb-3">
@@ -131,17 +131,17 @@
                       <span>01 min read</span>
                     </li>
                   </ul>
-                  <a class='d-block' href='/qurno/blog-single' title='Everything you wanted to know about the metaverse'>
+                  <a class='d-block' href='{{url("specific-blog/{$footer->id}")}}' title='{{$footer->title}}'>
                     <h3 class="mb-3 post-title">
-                      Everything you wanted to know about the metaverse
+                      {{$footer->title}}
                     </h3>
                   </a>
-                  <p>In the wake of Facebook rebranding as Meta, reflecting its focus on the “metaverse”, Microsoft has now announced it, too, will launch into this space. …</p>
+                  <p>{{$footer->description}}</p>
                 </div>
                 <div class="card-footer border-top-0 bg-transparent p-0">
                   <ul class="card-meta list-inline">
                     <li class="list-inline-item mt-2">
-                      <a class='card-meta-author' href='/qurno/author-single' title='Read all posts by - Emma Hazel'>
+                      <a class='card-meta-author' href='{{url("/author/{$footer->authorId}")}}' title='Read all posts by - Emma Hazel'>
                         <img class="w-auto" src="assets/images/author/emma-hazel.jpg" alt="Emma Hazel" width="26" height="26"> by <span>Emma</span>
                       </a>
                     </li>
@@ -155,50 +155,8 @@
                 </div>
               </article>
             </div>
+            @endforeach  
             
-            <div class="col-lg-6">
-              <article class="card post-card h-100 border-0 bg-transparent">
-                <div class="card-body">
-                  <a class='d-block' href='/qurno/blog-single' title='The AGI hype train is running out of steam'>
-                    <div class="post-image position-relative">
-                      <img class="w-100 h-auto rounded" src="assets/images/blog/02.jpg" alt="The AGI hype train is running out of steam" width="970" height="500">
-                    </div>
-                  </a>
-                  <ul class="card-meta list-inline mb-3">
-                    <li class="list-inline-item mt-2">
-                      <i class="ti ti-calendar-event"></i>
-                      <span>05 Dec, 2021</span>
-                    </li>
-                    <li class="list-inline-item mt-2">—</li>
-                    <li class="list-inline-item mt-2">
-                      <i class="ti ti-clock"></i>
-                      <span>02 min read</span>
-                    </li>
-                  </ul>
-                  <a class='d-block' href='/qurno/blog-single' title='The AGI hype train is running out of steam'>
-                    <h3 class="mb-3 post-title">
-                      The AGI hype train is running out of steam
-                    </h3>
-                  </a>
-                  <p>The AGI hype train has hit some heavy traffic. While futurists and fundraisers used to make bullish predictions about artificial general intelligence, …</p>
-                </div>
-                <div class="card-footer border-top-0 bg-transparent p-0">
-                  <ul class="card-meta list-inline">
-                    <li class="list-inline-item mt-2">
-                      <a class='card-meta-author' href='/qurno/author-single' title='Read all posts by - Thomas Macaulay'>
-                        <img class="w-auto" src="assets/images/author/thomas-macaulay.jpg" alt="Thomas Macaulay" width="26" height="26"> by <span>Thomas</span>
-                      </a>
-                    </li>
-                    <li class="list-inline-item mt-2">•</li>
-                    <li class="list-inline-item mt-2">
-                      <ul class="card-meta-tag list-inline">
-                        <li class="list-inline-item small"><a href='/qurno/tag-single'>Machine</a></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </div>
-              </article>
-            </div>
           </div>
         </div>
       </div>

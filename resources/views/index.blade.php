@@ -47,7 +47,7 @@
       <div class="col-lg-6">
         <article class="card post-card h-100 border-0 bg-transparent">
           <div class="card-body">
-            <a class='d-block' href='/qurno/blog-single' title='The AGI hype train is running out of steam'>
+            <a class='d-block' href='{{urL("specific-blog/{$blog->id}")}}' title='The AGI hype train is running out of steam'>
               <div class="post-image position-relative">
                 <img class="w-100 h-auto rounded" src="assets/images/blog/02.jpg" alt="The AGI hype train is running out of steam" width="970" height="500">
               </div>
@@ -63,7 +63,7 @@
                 <span>02 min read</span>
               </li>
             </ul>
-            <a class='d-block' href='/qurno/blog-single' title='The AGI hype train is running out of steam'>
+            <a class='d-block' href=''{{urL("specific-blog/{$blog->id}")}}' title='The AGI hype train is running out of steam'>
               <h3 class="mb-3 post-title">
                {{$blog->title}}
               </h3>
@@ -73,7 +73,7 @@
           <div class="card-footer border-top-0 bg-transparent p-0">
             <ul class="card-meta list-inline">
               <li class="list-inline-item mt-2">
-                <a class='card-meta-author' href='/qurno/author-single' title='Read all posts by - Thomas Macaulay'>
+                <a class='card-meta-author' href='{{url("author/{$blog->authorId}")}}' title='Read all posts by - Thomas Macaulay'>
                   <img class="w-auto" src="assets/images/author/thomas-macaulay.jpg" alt="Thomas Macaulay" width="26" height="26"> by <span>Thomas</span>
                 </a>
               </li>

@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 use App\Models\blogs;
 use Illuminate\Http\Request;
+use App\Models\Author;
 
 class BlogsController extends Controller
 {
     public function home(Request $request){
         $blogs = blogs::where("is_featured","=",1)->limit(6)->get();
+        // return response($blogs);
         $data = "";
         if(Session()->has("loginid")){
             $user = Session()->get("loginid");
@@ -21,7 +23,10 @@ class BlogsController extends Controller
     }
 
     public function SingleBlogs($id){
-        return view("blog-single");
+        $blogs = blogs::where("id",$id)->first();
+
+        $footerBlogs = blogs::take(2)->get();
+        return view("blog-single",compact("blogs","footerBlogs"));
     }
 
     public function Blogs(){
@@ -32,12 +37,24 @@ class BlogsController extends Controller
         return view("about");
     }
 
-    public function authorInfo(){
-        return view("author-single");
+    public function authorInfo($id){
+        $author = Author::where("author_id","=",$id)->first();
+        $blogs = blogs::where("authorId",$author->author_id)->get();
+        // return response($blogs);
+
+        return view("author-single",compact("author","blogs"));
     }
 
     public function publishPage(){
         return view("publish");
+    }
+
+    public function TagSingle(){
+        return view("tag-single");
+    }
+
+    public function Tag(){
+        return view("tags");
     }
 
     public function storePublishBlog(Request $request){

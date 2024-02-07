@@ -28,3 +28,6 @@ Route::get("/author",[AuthController::class,"author"])->name("author");
 Route::post("/authorStore",[AuthController::class,"storeAuthor"])->name("authorStore");
 Route::get("/publish",[BlogsController::class,"publishPage"])->name("publish");
 Route::post("/storeblog",[BlogsController::class,"storePublishBlog"])->name("storeBlog");
+
+// single author route
+Route::get("/author/{id}",[BlogsController::class,"authorInfo"])->name("authorInfo");
