@@ -33,7 +33,7 @@
 
    
 
-    <button type="submit" class="btn btn-primary w-25 mb-2">Submit Blog</button>
+    <button type="submit" class="btn btn-primary w-25 mb-2">Submit Blog {{Session::get("is_author")}}</button>
     
   </form>
 </div>

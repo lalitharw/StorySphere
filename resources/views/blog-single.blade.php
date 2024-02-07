@@ -14,8 +14,8 @@
 
           <ul class="card-meta list-inline mb-2">
             <li class="list-inline-item mt-2">
-              <a class='card-meta-author' href='{{url("/author/{$blogs->authorId}")}}' title='Read all posts by - Thomas Macaulay'>
-                <img class="w-auto" src="assets/images/author/thomas-macaulay.jpg" alt="Thomas Macaulay" width="26" height="26"> by <span>Thomas Macaulay</span>
+              <a class='card-meta-author' href='{{url("/author/{$blogs->authorId}")}}' title='Read all posts by - {{$blogs->user->firstname}}'>
+                <img class="w-auto" src="assets/images/author/thomas-macaulay.jpg" alt="{{$blogs->user->firstname}} {{$blogs->user->lastname}}" width="26" height="26"> by <span style="text-transform: capitalize">{{$blogs->user->firstname}} {{$blogs->user->lastname}}</span>
               </a>
             </li>
             <li class="list-inline-item mt-2">—</li>
@@ -58,6 +58,7 @@
           function socialWindow(pageLink, width, height){var left = (screen.width - width) / 2;var top = (screen.height - height) / 2;var params = "menubar=no,toolbar=no,status=no,width=" + width + ",height=" + height + ",top=" + top + ",left=" + left;window.open(pageLink,"",params);}
         </script>
       </div>
+      
       <div class="col-lg-8 post-content-block order-0 order-lg-2">
         <div class="content">
           <p>Light is fast. In fact, it is the fastest thing that exists, and a law of the universe is that nothing can move faster than light. Light travels at 186,000 miles per second (300,000 kilometers per second) and can go from the Earth to the Moon in just over a second. Light can streak from Los Angeles to New York in less than the blink of an eye.</p>
@@ -86,10 +87,10 @@
         <div class="col-lg-10">
           <div class="d-block d-md-flex">
             <a href='/qurno/author-single'>
-              <img class="rounded mr-4" src="assets/images/author/thomas-macaulay.jpg" alt="Thomas Macaulay" width="155" height="155">
+              <img class="rounded mr-4" src="assets/images/author/thomas-macaulay.jpg" alt="{{$blogs->user->firstname}} {{$blogs->user->lastname}}" width="155" height="155">
             </a>
             <div class="ms-0 ms-md-4 ps-0 ps-md-3 mt-4 mt-md-0">
-              <h3 class="h4 mb-3"><a class='text-dark' href='/qurno/author-single'>Thomas Macaulay</a></h3>
+              <h3 style="text-transform: capitalize" class="h4 mb-3"><a class='text-dark' href='/qurno/author-single'>{{$blogs->user->firstname}} {{$blogs->user->lastname}}  </a></h3>
               <p>{{$blogs->description}}</p>
               <div class="content"><a href='{{url("/author/{$blogs->authorId}")}}'>See all posts by this author <i class="ti ti-arrow-up-right"></i></a></div>
             </div>
@@ -141,8 +142,8 @@
                 <div class="card-footer border-top-0 bg-transparent p-0">
                   <ul class="card-meta list-inline">
                     <li class="list-inline-item mt-2">
-                      <a class='card-meta-author' href='{{url("/author/{$footer->authorId}")}}' title='Read all posts by - Emma Hazel'>
-                        <img class="w-auto" src="assets/images/author/emma-hazel.jpg" alt="Emma Hazel" width="26" height="26"> by <span>Emma</span>
+                      <a class='card-meta-author' href='{{url("/author/{$footer->authorId}")}}' title='Read all posts by - {{$footer->user->firstname}}'>
+                        <img class="w-auto" src="assets/images/author/emma-hazel.jpg" alt="{{$footer->user->firstname}} {{$footer->user->lastname}}" width="26" height="26"> by <span style="text-transform: capitalize">{{$footer->user->firstname}}</span>
                       </a>
                     </li>
                     <li class="list-inline-item mt-2">•</li>

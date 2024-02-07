@@ -14,10 +14,15 @@ class blogs extends Model
         "description",
         "is_featured",
         "tags",
-        "authorId"
+        "authorId",
+        'userid'
     ];
 
     public function author(){
         return $this->belongsTo(Author::class,"authorId");
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class,"userid");
     }
 }

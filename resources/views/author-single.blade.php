@@ -1,7 +1,7 @@
 @extends("layouts.main")
 
 @section("title")
- {{$author->name}}
+ {{$author_info->user->firstname}}
 @endsection
 
 @section("main-section")
@@ -12,13 +12,13 @@
       <div class="col-lg-10">
         <div class="row g-4 g-lg-5 text-center text-lg-start justify-content-center justify-content-lg-start">
           <div class="col-lg-3 col-md-4 col-sm-5 col-6">
-            <img class="img-fluid rounded" src="assets/images/author/thomas-macaulay.jpg" alt="Thomas Macaulay" width="250" height="250">
+            <img class="img-fluid rounded" src="assets/images/author/thomas-macaulay.jpg" alt="{{$author_info->user->firstname}} {{$author_info->user->lastname}}" width="250" height="250">
           </div>
           <div class="col-lg-9 col-md-12">
             <p class="mb-2"><span class="fw-bold text-black">{{count($blogs)}}</span> Published {{(count($blogs)>1)?"posts":"post"}}</p>
-            <h1 class="h3 text-dark mb-3">Thomas Macaulay</h1>
+            <h1 class="h3 text-dark mb-3">{{$author_info->user->firstname}} {{$author_info->user->lastname}}</h1>
             <div class="content">
-              <p>{{$author->description}}</p>
+              <p>{{$author_info->description}}</p>
             </div>
           </div>
         </div>
@@ -59,8 +59,8 @@
         <div class="card-footer border-top-0 bg-transparent p-0">
           <ul class="card-meta list-inline">
             <li class="list-inline-item mt-2">
-              <a class='card-meta-author' href='/qurno/author-single' title='Read all posts by - Thomas Macaulay'>
-                <img class="w-auto" src="assets/images/author/thomas-macaulay.jpg" alt="Thomas Macaulay" width="26" height="26"> by <span>Thomas</span>
+              <a class='card-meta-author' href='{{url("/author/{$blog->authorId}")}}' title='Read all posts by - {{$author_info->user->firstname}} {{$author_info->user->lastname}}'>
+                <img class="w-auto" src="assets/images/author/thomas-macaulay.jpg" alt="{{$author_info->user->firstname}} {{$author_info->user->lastname}}" width="26" height="26"> by <span>{{$author_info->user->firstname}} {{$author_info->user->lastname}}</span>
               </a>
             </li>
             <li class="list-inline-item mt-2">•</li>

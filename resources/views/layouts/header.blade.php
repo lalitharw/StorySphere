@@ -111,7 +111,7 @@
                                             </a>
                                             </li>
                                             <li class="dropdown-item">
-                                              <a>
+                                              <a href="{{url("/manage")}}" >
                                               <i class="ti ti-focus-centered"></i> Manage Blogs
                                               </a>
                                             </li>

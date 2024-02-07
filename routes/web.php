@@ -31,3 +31,6 @@ Route::post("/storeblog",[BlogsController::class,"storePublishBlog"])->name("sto
 
 // single author route
 Route::get("/author/{id}",[BlogsController::class,"authorInfo"])->name("authorInfo");
+
+// route for author managing their blogs
+Route::get("/manage",[BlogsController::class,"manageBlog"])->name("manageBlog");

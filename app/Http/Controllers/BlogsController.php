@@ -8,7 +8,10 @@ use App\Models\Author;
 class BlogsController extends Controller
 {
     public function home(Request $request){
-        $blogs = blogs::where("is_featured","=",1)->limit(6)->get();
+        $blogs = blogs::with("author","user")->where("is_featured","=",1)->limit(6)->get();
+
+        
+        // return response($sblogs);
         // return response($blogs);
         $data = "";
         if(Session()->has("loginid")){
@@ -23,9 +26,9 @@ class BlogsController extends Controller
     }
 
     public function SingleBlogs($id){
-        $blogs = blogs::where("id",$id)->first();
+        $blogs = blogs::with("user")->where("id",$id)->first();
 
-        $footerBlogs = blogs::take(2)->get();
+        $footerBlogs = blogs::with("user")->take(2)->get();
         return view("blog-single",compact("blogs","footerBlogs"));
     }
 
@@ -38,11 +41,10 @@ class BlogsController extends Controller
     }
 
     public function authorInfo($id){
-        $author = Author::where("author_id","=",$id)->first();
-        $blogs = blogs::where("authorId",$author->author_id)->get();
-        // return response($blogs);
-
-        return view("author-single",compact("author","blogs"));
+        $author_info = author::with("user")->where("id",$id)->first();
+        $blogs = blogs::where("authorid",$author_info->id)->get();
+        // return response($author_info);
+        return view("author-single",compact("blogs","author_info"));
     }
 
     public function publishPage(){
@@ -61,12 +63,15 @@ class BlogsController extends Controller
 
         
         $author_id = Session()->get("is_author");
+        $user = Session()->get("loginid");
+        // return $user;
 
             $blog = new blogs();
             $blog->title = $request->title;
             $blog->description = $request->desc;
             $blog->tags = "HAJ";
             $blog->authorId = $author_id;
+            $blog->userid = $user->id;
            $res =  $blog->save();
 
 
@@ -78,5 +83,14 @@ class BlogsController extends Controller
             }
     
 }
+
+    public function manageBlog(){
+        if(Session()->has("is_author")){
+           $author_id = Session()->get("is_author");
+            $blogs = blogs::where("authorId",$author_id)->get();
+        }
+       
+        return view("manageBlogs",compact("blogs"));
+    }
 
 }
