@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\blogs;
 use Illuminate\Http\Request;
 use App\Models\Author;
+use Illuminate\Support\Facades\Date;
 
 class BlogsController extends Controller
 {
@@ -91,6 +92,17 @@ class BlogsController extends Controller
         }
        
         return view("manageBlogs",compact("blogs"));
+    }
+
+    public function upload(){
+        return view("upload");
+    }
+
+    public function uploadFunction(Request $request){
+        echo "<pre>";
+        $filename = "lalit.". $request->file("image")->getClientOriginalExtension();
+        $name = $request->file("image")->storeAs("public/upload",$filename);
+        return "Photo uploaded at ".$name;
     }
 
 }
