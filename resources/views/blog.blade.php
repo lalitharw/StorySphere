@@ -67,6 +67,7 @@
         </div>
       </article>
     </div>
+   
     @endforeach
   
     
@@ -74,20 +75,30 @@
       <!-- pagination -->
       <nav class="text-center mt-5">
         <ul class="pagination justify-content-center border border-white rounded d-inline-flex">
-          <li class="page-item"><a aria-label='Pagination Arrow' class='page-link rounded w-auto px-4' href='/qurno/blog'>Prev</a></li>
-          <li class="page-item active ">
-            <a class='page-link rounded' href='/qurno/blog'>1</a>
-          </li>
-          <li class="page-item">
+          @if($blogs->previousPageUrl())
+          <li class="page-item"><a aria-label='Pagination Arrow' class='page-link rounded w-auto px-4' href='{{$blogs->previousPageUrl()}}'>Prev</a></li>
+          @endif
+
+          @foreach (range(1, $blogs->lastPage()) as $page)
+          <li class="page-item  {{$blogs->currentPage() == $page ?"active":""}}">
+            <a class='page-link rounded' href='{{$blogs->url($page)}}'>{{$page}}</a>
+          </li>  
+          @endforeach
+          
+          {{-- <li class="page-item">
             <a class='page-link rounded' href='/qurno/blog'>2</a>
           </li>
           <li class="page-item mt-2 mx-2">...</li>
-          <li class="page-item"><a aria-label='Pagination Arrow' class='page-link rounded' href='/qurno/blog'>16</a></li>
-          <li class="page-item"><a aria-label='Pagination Arrow' class='page-link rounded w-auto px-4' href='/qurno/blog'>Next</a></li>
+          <li class="page-item"><a aria-label='Pagination Arrow' class='page-link rounded' href='/qurno/blog'>16</a></li> --}}
+          @if($blogs->NextPageUrl())
+          <li class="page-item"><a aria-label='Pagination Arrow' class='page-link rounded w-auto px-4' href='{{ $blogs->NextPageUrl() }}'>Next</a></li>
+          @endif
         </ul>
       </nav>
       
     </div>
   </div>
 </div>
+
+
 @endsection
