@@ -43,6 +43,7 @@
       </div>
     </div>
     <div class="row gy-5 gx-4 g-xl-5">
+      @if(count($blogs)>1)
       @foreach ($blogs as $blog)
       <div class="col-lg-6">
         <article class="card post-card h-100 border-0 bg-transparent">
@@ -74,8 +75,8 @@
           <div class="card-footer border-top-0 bg-transparent p-0">
             <ul class="card-meta list-inline">
               <li class="list-inline-item mt-2">
-                <a class='card-meta-author' href='{{url("author/{$blog->authorId}")}}' title='Read all posts by -   {{$blog->user->firstname}} {{$blog->user->lastname}}'>
-                  <img class="w-auto" src="assets/images/author/thomas-macaulay.jpg" alt="Thomas Macaulay" width="26" height="26"> by <span>{{$blog->user->firstname}} {{$blog->user->lastname}}</span>
+                <a class='card-meta-author' href='{{url("author/{$blog->authorId}")}}' title='Read all posts by -   {{$blog->author->firstname}} {{$blog->user->lastname}}'>
+                  <img class="w-auto" src="{{asset("storage/app/public".$blog->author->avatar)}}" alt="{{$blog->user->firstname}} {{$blog->user->lastname}}" width="26" height="26"> by <span>{{$blog->user->firstname}} {{$blog->user->lastname}}</span>
                 </a>
               </li>
               <li class="list-inline-item mt-2">•</li>
@@ -89,6 +90,7 @@
         </article>
       </div>
       @endforeach
+      @endif
    
      
       <div class="col-12 text-center">

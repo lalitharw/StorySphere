@@ -25,7 +25,7 @@ class AuthController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $res = $user->save();
-        
+        $request->session()->put("signid",$user);
         if($res){
         if(Session()->has("redirect_to_author_page")){
             
@@ -99,20 +99,43 @@ class AuthController extends Controller
 
 
         $author = new Author();
+
+        if(session()->has("loginid")){
         $user = Session()->get("loginid");
         $user_id = $user->id;
-        $author->avatar = $request->avatar;
+        }
+        else{
+            $user = Session()->get("signid");
+            $user_id = $user->id;
+        }
+        
+
+        $filename = time()."author.".$request->file("avatar")->getClientOriginalExtension();
+        $author->avatar = $request->file("avatar")->store("uploads");
         $author->description = $request->desc;
+
+        // if not loginid session then use signid session
+
         $author->user_id = $user_id;
        
         $res = $author->save();
 
         if($res){
+            $request->session()->put("is_author",True);
+            return redirect("/");   
+        }
+
+        else if($res){
+            
             return redirect("/login")->with("message","Author Details SuccessFul!! Login in");
         }
         else{
             return back()->with("message","something went wrong");
         }
+
+       
+
+        return view("auth.authorPage");
 
     }
 

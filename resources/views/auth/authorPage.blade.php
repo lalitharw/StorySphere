@@ -10,10 +10,10 @@
         <div class=" col-sm-10">
             <h2>Author Details</h2>
           
-<form action="{{route("authorStore")}}" method="POST">
+<form action="{{route("authorStore")}}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="form-group">
-      <label for="email">Email:</label>
+      <label for="email">Avatar:</label>
       <input type="file" name="avatar" class="form-control" placeholder="Select Profile Image" id="file">
     </div>
     <br>

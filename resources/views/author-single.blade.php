@@ -12,7 +12,7 @@
       <div class="col-lg-10">
         <div class="row g-4 g-lg-5 text-center text-lg-start justify-content-center justify-content-lg-start">
           <div class="col-lg-3 col-md-4 col-sm-5 col-6">
-            <img class="img-fluid rounded" src="assets/images/author/thomas-macaulay.jpg" alt="{{$author_info->user->firstname}} {{$author_info->user->lastname}}" width="250" height="250">
+            <img class="img-fluid rounded" src="{{asset($author_info->avatar)}}" alt="{{$author_info->user->firstname}} {{$author_info->user->lastname}}" width="250" height="250">
           </div>
           <div class="col-lg-9 col-md-12">
             <p class="mb-2"><span class="fw-bold text-black">{{count($blogs)}}</span> Published {{(count($blogs)>1)?"posts":"post"}}</p>

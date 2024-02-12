@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 use App\Models\blogs;
 use Illuminate\Http\Request;
 use App\Models\Author;
-use Illuminate\Support\Facades\Date;
 
 class BlogsController extends Controller
 {
@@ -34,7 +33,8 @@ class BlogsController extends Controller
     }
 
     public function Blogs(){
-        return view("blog");
+        $blogs = blogs::all();
+        return view("blog",compact("blogs"));
     }
 
     public function about(){
