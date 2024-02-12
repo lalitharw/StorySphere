@@ -80,7 +80,7 @@ class BlogsController extends Controller
                 return redirect("/")->with("message",'Blog Published SuccessFully');
             }
             else{
-                return back()->with("message","Somrthing went wrong");
+                return back()->with("message","Something went wrong");
             }
     
 }
