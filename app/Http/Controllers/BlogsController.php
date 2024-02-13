@@ -4,15 +4,21 @@ namespace App\Http\Controllers;
 use App\Models\blogs;
 use Illuminate\Http\Request;
 use App\Models\Author;
+use App\Models\Tag;
 
 class BlogsController extends Controller
 {
     public function home(Request $request){
+        $tags = Tag::all();
         $blogs = blogs::with("author","user")->where("is_featured","=",1)->limit(6)->get();
 
         
-        // return response($sblogs);
-        // return response($blogs);
+        foreach($blogs as $blog){
+            $he = $blog->tags;
+        }
+        $tag_array = explode(",",$he);
+        
+
         $data = "";
         if(Session()->has("loginid")){
             $user = Session()->get("loginid");
@@ -21,7 +27,7 @@ class BlogsController extends Controller
         }
     
 
-        return view("index",compact('blogs'));
+        return view("index",compact('blogs',"tags",'tag_array'));
         // return response()->json(['data'=>$data]);
     }
 
@@ -49,7 +55,8 @@ class BlogsController extends Controller
     }
 
     public function publishPage(){
-        return view("publish");
+        $tags = Tag::all();
+        return view("publish",compact("tags"));
     }
 
     public function TagSingle(){
@@ -70,10 +77,13 @@ class BlogsController extends Controller
             $blog = new blogs();
             $blog->title = $request->title;
             $blog->description = $request->desc;
-            $blog->tags = "HAJ";
+
+            // imploding the tag
+            $blog->tags = implode(",",$request->tags);
             $blog->authorId = $author_id;
             $blog->userid = $user->id;
-           $res =  $blog->save();
+            return $blog;
+            $res =  $blog->save();
 
 
             if($res){
@@ -94,6 +104,12 @@ class BlogsController extends Controller
         return view("manageBlogs",compact("blogs"));
     }
 
+
+    public function header(){
+        $tags = Tag::all();
+        return view("layouts.header",compact("tags"));
+    }
+
     public function upload(){
         return view("upload");
     }
@@ -104,5 +120,7 @@ class BlogsController extends Controller
         $name = $request->file("image")->storeAs("public/upload",$filename);
         return "Photo uploaded at ".$name;
     }
+
+
 
 }

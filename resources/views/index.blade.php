@@ -4,6 +4,16 @@
   Home
 @endsection
 
+@section("tags-section")
+
+  @foreach ($tags as $tag)
+  <li class="list-inline-item me-1 mb-2">
+    <a class="small" href="{{$tag->tag_id}}">{{$tag->tag_name}}</a>
+  </li>
+  @endforeach
+  
+@endsection
+
 @section("main-section")
 <section class="section banner overflow-hidden">
   <div class="container">
@@ -82,7 +92,11 @@
               <li class="list-inline-item mt-2">•</li>
               <li class="list-inline-item mt-2">
                 <ul class="card-meta-tag list-inline">
-                  <li class="list-inline-item small"><a href='/qurno/tag-single'>Machine</a></li>
+                    @foreach ($tag_array as $tag_arr)
+                  <li class="list-inline-item small"><a href='/qurno/tag-single'>{{$tag_arr}}</a></li>
+                      
+                    @endforeach
+
                 </ul>
               </li>
             </ul>

@@ -23,56 +23,25 @@
     <div class="container">
     
       <div class="row gy-5 gx-4 g-xl-5">
-        @foreach ($blogs as $blog)
-        <div class="col-lg-6">
-          <article class="card post-card h-100 border-0 bg-transparent">
-            <div class="card-body">
-              <a class='d-block' href='{{urL("specific-blog/{$blog->id}")}}' title='The AGI hype train is running out of steam'>
-                <div class="post-image position-relative">
-                  <img class="w-100 h-auto rounded" src="assets/images/blog/02.jpg" alt="The AGI hype train is running out of steam" width="970" height="500">
-                </div>
-              </a>
-              <ul class="card-meta list-inline mb-3">
-                <li class="list-inline-item mt-2">
-                  <i class="ti ti-calendar-event"></i>
-                  <span>{{$blog->created_at}}</span>
-                </li>
-                <li class="list-inline-item mt-2">—</li>
-                <li class="list-inline-item mt-2">
-                  <i class="ti ti-clock"></i>
-                  <span>02 min read</span>
-                </li>
-              </ul>
-              <a class='d-block' href='{{urL("specific-blog/{$blog->id}")}}' title='The AGI hype train is running out of steam'>
-                <h3 class="mb-3 post-title">
-                 {{$blog->title}}
-                 
-                </h3>
-              </a>
-              <p>The AGI hype train has hit some heavy traffic. While futurists and fundraisers used to make bullish predictions about artificial general intelligence, …</p>
-            </div>
-            <div class="card-footer border-top-0 bg-transparent p-0">
-              <ul class="card-meta list-inline">
-                <li class="list-inline-item mt-2">
-                  <a class='card-meta-author' href='{{url("author/{$blog->authorId}")}}' title='Read all posts by -   {{$blog->user->firstname}} {{$blog->user->lastname}}'>
-                    <img class="w-auto" src="assets/images/author/thomas-macaulay.jpg" alt="Thomas Macaulay" width="26" height="26"> by <span>{{$blog->user->firstname}} {{$blog->user->lastname}}</span>
-                  </a>
-                </li>
-                <li class="list-inline-item mt-2">•</li>
-                <li class="list-inline-item mt-2">
-                  <ul class="card-meta-tag list-inline">
-                    <li class="list-inline-item small"><a href='/qurno/tag-single'>Machine</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          </article>
-        </div>
-        @endforeach
-     
-       
-      
-      </div>
+        <table class="table p-1">
+          <thead>
+            <tr>
+              <th scope="col">Title</th>
+              <th scope="col">Action Button</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach ($blogs as $blog)
+            <tr>
+              <td ><h4>{{$blog->title}}</h4></td>
+              <td><a class="btn btn-primary btn-sm"><i class="ti ti-edit"></i> Edit</a>
+                <a class="btn btn-danger btn-sm"><i class="ti ti-x"></i> Delete</a>
+              </td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
+   </div>
     </div>
   </section>
 @endsection
