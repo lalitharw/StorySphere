@@ -66,7 +66,7 @@
             <ul class="card-meta list-inline mb-3">
               <li class="list-inline-item mt-2">
                 <i class="ti ti-calendar-event"></i>
-                <span>{{$blog->created_at}}</span>
+                <span>{{optional($blog->created_at)->format('M j, Y')}}</span>
               </li>
               <li class="list-inline-item mt-2">—</li>
               <li class="list-inline-item mt-2">
@@ -86,7 +86,7 @@
             <ul class="card-meta list-inline">
               <li class="list-inline-item mt-2">
                 <a class='card-meta-author' href='{{url("author/{$blog->authorId}")}}' title='Read all posts by -   {{$blog->author->firstname}} {{$blog->user->lastname}}'>
-                  <img class="w-auto" src="{{asset("storage/app/public".$blog->author->avatar)}}" alt="{{$blog->user->firstname}} {{$blog->user->lastname}}" width="26" height="26"> by <span>{{$blog->user->firstname}} {{$blog->user->lastname}}</span>
+                  <img class="w-auto" src="{{asset("/storage".$blog->author->avatar)}}" alt="{{$blog->user->firstname}} {{$blog->user->lastname}}" width="26" height="26"> by <span>{{$blog->user->firstname}} {{$blog->user->lastname}}</span>
                 </a>
               </li>
               <li class="list-inline-item mt-2">•</li>

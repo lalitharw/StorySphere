@@ -27,24 +27,19 @@
 @section('main-section')
     <div class="container mt-4" style="min-height:70vh">
         <div class="row d-flex justify-content-center">
-            <div class="col-10 ">
+            <div class="col-12 ">
                 <h2>Publish Blog</h2>
 
                 <form action="{{ route('storeBlog') }}" method="POST">
                     @csrf
+                    <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-12 mb-3">
-                            <div class="form-group">
-                                <label for="title">Title:</label>
-                                <input type="text" name="title" class="form-control" placeholder="Enter Blog Title"
-                                    id="title">
-                            </div>
-                        </div>
+                        
 
                         <div class="  col-md-6  mb-3">
                           <div class="form-group">
                             <label for="Description">Select Tags:</label>
-                          <select name="tags[]" id="countries" multiple>
+                          <select name="tags[]" id="tags" multiple>
                             @foreach ($tags as $tag)
                             <option value="{{$tag->tag_id}}">{{$tag->tag_name}}</option>
                             @endforeach
@@ -75,10 +70,10 @@
                         </div> --}}
 
                         {{-- select field --}}
-                      
+                    </div>
 
                     </div>
-                    <button type="submit" class="btn btn-primary w-25 mb-2">Submit Blog</button>
+                    <button type="submit" class="btn btn-primary w-25 mb-2 btn-sm-sm">Submit Blog</button>
 
                 </form>
             </div>
@@ -106,10 +101,10 @@
   </script>
 
 <script>
-  new MultiSelectTag('countries', {
+  new MultiSelectTag('tags', {
     rounded: true,    // default true
     shadow: true,      // default false
-    placeholder: 'Search',  // default Search...
+    placeholder: 'Search Tags',  // default Search...
     tagColor: {
         textColor: '#327b2c',
         borderColor: '#92e681',

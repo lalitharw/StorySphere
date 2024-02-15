@@ -36,12 +36,12 @@
           <ul class="card-meta list-inline mb-3">
             <li class="list-inline-item mt-2">
               <i class="ti ti-calendar-event"></i>
-              <span>12 Aug, 2020</span>
+              <span>{{ optional($blog->created_at)->format("M j, Y") }}</span>
             </li>
             <li class="list-inline-item mt-2">—</li>
             <li class="list-inline-item mt-2">
               <i class="ti ti-clock"></i>
-              <span>03 min read</span>
+              <span>calculateReadingTime({{$blog->description}}) min read</span>
             </li>
           </ul>
           <a class='d-block' href='/qurno/blog-single' title='{{$blog->title}}'><h3 class="mb-3 post-title">
@@ -53,7 +53,7 @@
           <ul class="card-meta list-inline">
             <li class="list-inline-item mt-2">
               <a class='card-meta-author' href='/qurno/author-single' title='Read all posts by - {{$blog->user->firstname}} {{$blog->user->lastname}}'>
-                <img class="w-auto" src="assets/images/author/chris-impey.jpg" alt="Chris Impey" width="26" height="26"> by <span>{{$blog->user->firstname}} {{$blog->user->lastname}}</span>
+                <img class="w-auto" src="{{asset('storage'.$blog->author->avatar)}}" alt="Chris Impey" width="26" height="26"> by <span>{{$blog->user->firstname}} {{$blog->user->lastname}}</span>
               </a>
             </li>
             <li class="list-inline-item mt-2">•</li>

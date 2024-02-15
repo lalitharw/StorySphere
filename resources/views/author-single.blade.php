@@ -12,7 +12,7 @@
       <div class="col-lg-10">
         <div class="row g-4 g-lg-5 text-center text-lg-start justify-content-center justify-content-lg-start">
           <div class="col-lg-3 col-md-4 col-sm-5 col-6">
-            <img class="img-fluid rounded" src="{{asset($author_info->avatar)}}" alt="{{$author_info->user->firstname}} {{$author_info->user->lastname}}" width="250" height="250">
+            <img class="img-fluid rounded" src="{{asset('storage'.$author_info->avatar)}}" alt="{{$author_info->user->firstname}} {{$author_info->user->lastname}}" style="max-width: 200px; max-height: 200px; ">
           </div>
           <div class="col-lg-9 col-md-12">
             <p class="mb-2"><span class="fw-bold text-black">{{count($blogs)}}</span> Published {{(count($blogs)>1)?"posts":"post"}}</p>
@@ -41,7 +41,7 @@
           <ul class="card-meta list-inline mb-3">
             <li class="list-inline-item mt-2">
               <i class="ti ti-calendar-event"></i>
-              <span>05 Dec, 2021</span>
+              <span>{{optional($blog->created_at)->format('M j, Y')}}</span>
             </li>
             <li class="list-inline-item mt-2">—</li>
             <li class="list-inline-item mt-2">
@@ -54,13 +54,13 @@
               {{$blog->title}}
             </h3>
           </a>
-          <p>The AGI hype train has hit some heavy traffic. While futurists and fundraisers used to make bullish predictions about artificial general intelligence, …</p>
+          <p>{{$blog->description}}</p>
         </div>
         <div class="card-footer border-top-0 bg-transparent p-0">
           <ul class="card-meta list-inline">
             <li class="list-inline-item mt-2">
               <a class='card-meta-author' href='{{url("/author/{$blog->authorId}")}}' title='Read all posts by - {{$author_info->user->firstname}} {{$author_info->user->lastname}}'>
-                <img class="w-auto" src="assets/images/author/thomas-macaulay.jpg" alt="{{$author_info->user->firstname}} {{$author_info->user->lastname}}" width="26" height="26"> by <span>{{$author_info->user->firstname}} {{$author_info->user->lastname}}</span>
+                <img class="w-auto" src="{{asset('storage'.$author_info->avatar)}}" alt="{{$author_info->user->firstname}} {{$author_info->user->lastname}}" width="26" height="26"> by <span>{{$author_info->user->firstname}} {{$author_info->user->lastname}}</span>
               </a>
             </li>
             <li class="list-inline-item mt-2">•</li>

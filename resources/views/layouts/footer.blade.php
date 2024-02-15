@@ -31,5 +31,16 @@
   <script>
     @yield("scripts")
   </script>
+
+{{-- script to calculate words to read --}}
+  <script>
+    function calculateReadingTime(words){
+      let averageReadingSpeed = 200
+
+      let readingTIme = words.length/averageReadingSpeed
+
+      console.log(readingTIme);
+    }
+  </script>
   
   </body></html>

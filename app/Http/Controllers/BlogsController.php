@@ -120,6 +120,9 @@ class BlogsController extends Controller
         return "Photo uploaded at ".$name;
     }
 
+    // function to read average reading time
+  
+
 
 
 }
