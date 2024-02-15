@@ -77,7 +77,6 @@ class BlogsController extends Controller
             $blog = new blogs();
             $blog->title = $request->title;
             $blog->description = $request->desc;
-
             // imploding the tag
             $blog->tags = implode(",",$request->tags);
             $blog->authorId = $author_id;
