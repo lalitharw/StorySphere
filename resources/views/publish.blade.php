@@ -34,9 +34,7 @@
                     @csrf
                     <div class="container-fluid">
                     <div class="row">
-                        
-
-                        <div class="  col-md-6  mb-3">
+                      <div class="  col-md-6  mb-3">
                           <div class="form-group">
                             <label for="Description">Select Tags:</label>
                           <select name="tags[]" id="tags" multiple>
@@ -59,17 +57,12 @@
                                   
                         </div>
                         </div>
-                        {{-- <div class="col-md-12  mb-3">
+                        
                             
-                            <div class="form-group">
-                                <label for="Description">Description:</label>
-                                <textarea  rows="10" name="desc" class="form-control" placeholder="Enter Blog Description" id="desc"></textarea>
-                            </div>
+                         
 
 
-                        </div> --}}
-
-                        {{-- select field --}}
+                        
                     </div>
 
                     </div>

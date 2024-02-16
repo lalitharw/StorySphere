@@ -5,13 +5,20 @@ use App\Models\blogs;
 use Illuminate\Http\Request;
 use App\Models\Author;
 use App\Models\Tag;
+use DOMDocument;
+
 
 class BlogsController extends Controller
 {
     public function home(Request $request){
         $tags = Tag::all();
         $blogs = blogs::with("author","user")->where("is_featured","=",1)->limit(6)->get();
-
+        $extractPara = [];
+        foreach($blogs as $blog){
+            $extractPara[] =  $this->extractPara($blog->title);
+        }
+        
+        // return $blogs;
         
         foreach($blogs as $blog){
             $he = $blog->tags;
@@ -27,7 +34,7 @@ class BlogsController extends Controller
         }
     
 
-        return view("index",compact('blogs',"tags",'tag_array'));
+        return view("index",compact('blogs',"tags",'tag_array',"extractPara"));
         // return response()->json(['data'=>$data]);
     }
 
@@ -69,11 +76,10 @@ class BlogsController extends Controller
 
     public function storePublishBlog(Request $request){
 
-        
+    
         $author_id = Session()->get("is_author");
         $user = Session()->get("loginid");
-        // return $user;
-
+        
             $blog = new blogs();
             $blog->title = $request->title;
             $blog->description = $request->desc;
@@ -81,7 +87,7 @@ class BlogsController extends Controller
             $blog->tags = implode(",",$request->tags);
             $blog->authorId = $author_id;
             $blog->userid = $user->id;
-            return $blog;
+            // return $blog;
             $res =  $blog->save();
 
 
@@ -120,9 +126,36 @@ class BlogsController extends Controller
         return "Photo uploaded at ".$name;
     }
 
-    // function to read average reading time
+    // function to read first image and first para and set them as heading and thumbnail
   
+    private function extractImage($htmlcontent){
+        $dom = new DOMDocument();
 
+        $dom->loadHTML($htmlcontent);
+
+        $image = $dom->getElementsByTagName("img");
+        
+        if($image->length > 0){
+            $firstImage = $image[0]->getAttribute("src");
+            return $firstImage;
+        }   
+        return null;
+
+    }
+
+    private function extractPara($htmlcontent){
+        $dom = new DOMDocument();
+
+        $dom->loadHTML($htmlcontent);
+
+        $para = $dom->getElementsByTagName("p");
+
+        if($para->length >0){
+            $firstPara = $para[0]->textContent;
+            return $firstPara;
+        }
+        return null;
+    }
 
 
 }

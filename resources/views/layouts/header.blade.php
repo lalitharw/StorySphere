@@ -42,13 +42,37 @@
                             <img class="img-fluid" width="110" height="35" src="{{url('assets/images/logo.png')}}" alt="Qurno">
                         </a>
 
-                        <button class="search-toggle d-inline-block d-lg-none ms-auto me-1 me-sm-3" data-toggle="search" aria-label="Search Toggle">
+                        
+
+                        @if(Session::has("loginid"))
+                        <div class="dropdown  d-sm-inline-block d-lg-none ms-auto ">
+                            <a class=" dropdown-toggle text-white" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <i  class="text-dark fs-1 ti ti-user-circle"></i>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="{{route("publish")}}"><i class="ti ti-notebook"></i> Publish New Blog</a>
+                                <a class="dropdown-item" href="{{url("manage")}}"><i class="ti ti-focus-centered"></i> Manage Blogs</a>
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf <!-- CSRF protection for POST requests -->
+                                    <button type="submit" class="dropdown-item btn btn-primary text-white">
+                                        <i class="ti ti-logout"></i> Logout
+                                    </button>
+                                </form>
+                              </div>
+                          </div>
+                        @else
+                        <a href="{{url("/login")}}" type="button" class=" d-inline-block d-lg-none ms-auto btn-sm  btn btn-primary text-white">Login</a>
+                            
+                        @endif
+
+                        <button class="search-toggle d-inline-block  ms-auto me-1 me-sm-3" data-toggle="search" aria-label="Search Toggle">
                             <span>Search</span>
                             <svg width="22" height="22" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M15.5 15.5L19 19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
                                 <path d="M5 11C5 14.3137 7.68629 17 11 17C12.6597 17 14.1621 16.3261 15.2483 15.237C16.3308 14.1517 17 12.654 17 11C17 7.68629 14.3137 5 11 5C7.68629 5 5 7.68629 5 11Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </button>
+                        
 
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navHeader" aria-controls="navHeader" aria-expanded="false" aria-label="Toggle navigation">
                             <i class="ti ti-menu-2 menu-open"></i>
@@ -74,70 +98,40 @@
                                
                                 @endif
 
-                                {{-- <li class="nav-item">
-                  @if (Session::has("loginid"))
-
-                  <form action="{{route(" logout")}}" method="post">
-                                @csrf
-                                <button class="btn btn-primary"><i class="ti ti-logout"></i> Logout</button>
-                                </form>
-                                @else
-                                <a class="btn btn-primary" href="{{url("/login")}}" class="btn btn-primary"><i class="ti ti-login me-2"></i>Login</a>
-                                @endif
-                                </li> --}}
+                               
                             </ul>
 
 
-                            <div class="navbar-right {{request()->url() == url("/login")?"d-none":"d-lg-inline-block"}}">
+                            <button class="search-toggle d-inline-block d-lg-none  ms-auto me-1 me-sm-3" data-toggle="search" aria-label="Search Toggle">
+                                <span>Search</span>
+                                <svg width="22" height="22" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M15.5 15.5L19 19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M5 11C5 14.3137 7.68629 17 11 17C12.6597 17 14.1621 16.3261 15.2483 15.237C16.3308 14.1517 17 12.654 17 11C17 7.68629 14.3137 5 11 5C7.68629 5 5 7.68629 5 11Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                            <div class="navbar-right d-none d-lg-inline-block">
                                 <ul class="social-links list-unstyled list-inline">
-                                    <li class="list-inline-item ms-4 d-none d-lg-inline-block">
-                                        <button class="search-toggle" data-toggle="search" aria-label="Search Toggle">
-                                            <span>Search</span>
-                                            <svg width="22" height="22" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M15.5 15.5L19 19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M5 11C5 14.3137 7.68629 17 11 17C12.6597 17 14.1621 16.3261 15.2483 15.237C16.3308 14.1517 17 12.654 17 11C17 7.68629 14.3137 5 11 5C7.68629 5 5 7.68629 5 11Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </button>
-                                    </li>
+                                  <li class="list-inline-item ms-4 d-none d-lg-inline-block">
                                     @if(Session::has("data"))
-                                    <li class="nav-item list-inline-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Hello, {{Session::get("data")}}
-                                        </a>
-                                        <ul class="dropdown-menu dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
-
-                                            @if(Session::has("is_author"))
-                                            <li class="dropdown-item">
-                                              <a href="{{route("publish")}}">
-                                              <i class="ti ti-notebook"></i> Publish New Blog
-                                            </a>
-                                            </li>
-                                            <li class="dropdown-item">
-                                              <a href="{{url("/manage")}}" >
-                                              <i class="ti ti-focus-centered"></i> Manage Blogs
-                                              </a>
-                                            </li>
-                                            @endif
-                                            <li class="dropdown-item">
-
-                                                <form class="text-center" action="{{route("logout")}}" method="post">
-                                                    @csrf
-                                                    {{-- < href=""><i class="ti ti-logout"></i> Logout</a> --}}
-                                                    <button class="btn btn-primary"><i class="ti ti-logout"></i> Logout</a>
-                                                </form>
-
-
-                                            </li>
-                                    </li>
+                                    <div class="dropdown  d-sm-none d-lg-inline-block ms-auto ">
+                                      <a class=" dropdown-toggle text-white" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i  class="text-dark fs-1 ti ti-user-circle"></i>
+                                      </a>
+                                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="{{route("publish")}}"><i class="ti ti-notebook"></i> Publish New Blog</a>
+                                        <a class="dropdown-item" href="{{url("manage")}}"><i class="ti ti-focus-centered"></i> Manage Blogs</a>
+                                        <form action="{{ route('logout') }}" method="POST">
+                                            @csrf <!-- CSRF protection for POST requests -->
+                                            <button type="submit" class="dropdown-item btn btn-primary text-white">
+                                                <i class="ti ti-logout"></i> Logout
+                                            </button>
+                                        </form>
+                                      </div>
+                                    </div>
                                     @else
-                                    <a href="{{url("/login")}}" class="text-white btn btn-primary"><i class="ti ti-login me-2"></i>Login</a>
-                                    @endif
-
-
-                                </ul>
-                                </li>
-                                </ul>
-                            </div>
+                                    <a href="{{route("login")}}" class="btn btn-primary text-white" >Login</a>
+                            @endif
+                  
 
 
                         </div>
