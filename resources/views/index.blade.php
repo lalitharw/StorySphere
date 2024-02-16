@@ -74,8 +74,8 @@
             </ul>
             <a class='d-block' href='{{urL("specific-blog/{$blog->id}")}}' title='The AGI hype train is running out of steam'>
               <h3 class="mb-3 post-title">
-               {{$blog->title}}
-               {{-- <x-extract_text :htmlContent="$blog->title" /> --}}
+                {{-- custom helper function --}}
+               {{extractPara("{$blog->title}")}}
                
               </h3>
             </a>
