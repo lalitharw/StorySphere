@@ -36,7 +36,10 @@ Route::get("/author/{id}",[BlogsController::class,"authorInfo"])->name("authorIn
 // route for author managing their blogs
 Route::get("/manage",[BlogsController::class,"manageBlog"])->name("manageBlog");
 
+Route::get("/edit/{id}",[BlogsController::class,"editBlog"])->name("edit");
+Route::post("/edit/{id}",[BlogsController::class,"updateBlog"])->name("upateBlog");
 
 // test controller to upload file
 Route::get("/upload",[BlogsController::class,"upload"])->name("upload");
 Route::post("/upload",[BlogsController::class,"uploadFunction"]);
+

@@ -5,7 +5,7 @@ use App\Models\blogs;
 use Illuminate\Http\Request;
 use App\Models\Author;
 use App\Models\Tag;
-use DOMDocument;
+
 
 
 class BlogsController extends Controller
@@ -13,10 +13,7 @@ class BlogsController extends Controller
     public function home(Request $request){
         $tags = Tag::all();
         $blogs = blogs::with("author","user")->where("is_featured","=",1)->limit(6)->get();
-        $extractPara = [];
-        foreach($blogs as $blog){
-            $extractPara[] =  $this->extractPara($blog->title);
-        }
+        
         
         // return $blogs;
         
@@ -34,7 +31,7 @@ class BlogsController extends Controller
         }
     
 
-        return view("index",compact('blogs',"tags",'tag_array',"extractPara"));
+        return view("index",compact('blogs',"tags",'tag_array'));
         // return response()->json(['data'=>$data]);
     }
 
@@ -76,12 +73,17 @@ class BlogsController extends Controller
 
     public function storePublishBlog(Request $request){
 
-    
+        $request->validate([
+            "title" => "required",
+            "description" => "required",
+            "tags" => "reuqired"
+        ]);
+
         $author_id = Session()->get("is_author");
         $user = Session()->get("loginid");
         
             $blog = new blogs();
-            $blog->title = $request->title;
+            $blog->title = "ew";
             $blog->description = $request->desc;
             // imploding the tag
             $blog->tags = implode(",",$request->tags);
@@ -109,6 +111,25 @@ class BlogsController extends Controller
         return view("manageBlogs",compact("blogs"));
     }
 
+    public function editBlog($id){
+        $tags = Tag::all();
+        $route = $id;
+        $blog = Blogs::where("id",$id)->first();
+        return view("edit",compact("tags","blog","route"));
+    }
+
+    public function updateBlog($id,Request $request){
+        $blog = blogs::find($id);
+        
+        $blog->description = $request->desc;
+        // imploding the tag
+        $blog->tags = implode(",",$request->tags);
+        
+        // return $blog;
+        $blog->save();
+        
+    }
+
 
     public function header(){
         $tags = Tag::all();
@@ -128,34 +149,6 @@ class BlogsController extends Controller
 
     // function to read first image and first para and set them as heading and thumbnail
   
-    private function extractImage($htmlcontent){
-        $dom = new DOMDocument();
-
-        $dom->loadHTML($htmlcontent);
-
-        $image = $dom->getElementsByTagName("img");
-        
-        if($image->length > 0){
-            $firstImage = $image[0]->getAttribute("src");
-            return $firstImage;
-        }   
-        return null;
-
-    }
-
-    private function extractPara($htmlcontent){
-        $dom = new DOMDocument();
-
-        $dom->loadHTML($htmlcontent);
-
-        $para = $dom->getElementsByTagName("p");
-
-        if($para->length >0){
-            $firstPara = $para[0]->textContent;
-            return $firstPara;
-        }
-        return null;
-    }
 
 
 }
