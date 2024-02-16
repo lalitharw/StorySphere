@@ -38,6 +38,7 @@ Route::get("/manage",[BlogsController::class,"manageBlog"])->name("manageBlog");
 
 Route::get("/edit/{id}",[BlogsController::class,"editBlog"])->name("edit");
 Route::post("/edit/{id}",[BlogsController::class,"updateBlog"])->name("upateBlog");
+Route::post("/delete/{id}/",[BlogsController::class,"deleteBlog"]);
 
 // test controller to upload file
 Route::get("/upload",[BlogsController::class,"upload"])->name("upload");

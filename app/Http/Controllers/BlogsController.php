@@ -73,11 +73,7 @@ class BlogsController extends Controller
 
     public function storePublishBlog(Request $request){
 
-        $request->validate([
-            "title" => "required",
-            "description" => "required",
-            "tags" => "reuqired"
-        ]);
+       
 
         $author_id = Session()->get("is_author");
         $user = Session()->get("loginid");
@@ -128,6 +124,11 @@ class BlogsController extends Controller
         // return $blog;
         $blog->save();
         
+    }
+
+    public function deleteBlog($id){
+        $blog = blogs::find($id)->delete();
+        return redirect()->back();
     }
 
 

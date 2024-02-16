@@ -35,7 +35,7 @@
         <div class="card-body">
           <a class='d-block' href='/qurno/blog-single' title='The AGI hype train is running out of steam'>
             <div class="post-image position-relative">
-              <img class="w-100 h-auto rounded" src="{{asset('assets/images/blog/02.jpg')}}" alt="The AGI hype train is running out of steam" width="970" height="500">
+              <img class="w-100 h-auto rounded" src="{{extractImage("{$blog->description}")}}" alt="The AGI hype train is running out of steam" width="970" height="500">
             </div>
           </a>
           <ul class="card-meta list-inline mb-3">
@@ -46,15 +46,16 @@
             <li class="list-inline-item mt-2">—</li>
             <li class="list-inline-item mt-2">
               <i class="ti ti-clock"></i>
-              <span>02 min read</span>
+              <span>{{caculateReadingTime("{$blog->description}")}} min read</span>
             </li>
           </ul>
           <a class='d-block' href='/qurno/blog-single' title='The AGI hype train is running out of steam'>
             <h3 class="mb-3 post-title">
               {{$blog->title}}
+              {{-- {{extractPara("{$blog->description}")}} --}}
             </h3>
           </a>
-          <p>{{$blog->description}}</p>
+          <p>{{extractPara("{$blog->description}")}}</p>
         </div>
         <div class="card-footer border-top-0 bg-transparent p-0">
           <ul class="card-meta list-inline">

@@ -34,8 +34,13 @@
             @foreach ($blogs as $blog)
             <tr>
               <td ><h4>{{$blog->title}}</h4></td>
-              <td><a class="btn btn-primary btn-sm"><i class="ti ti-edit"></i> Edit</a>
-                <a class="btn btn-danger btn-sm"><i class="ti ti-x"></i> Delete</a>
+              <td><a class="btn btn-primary btn-sm" href="{{ url('/edit/' . $blog->id) }}"><i class="ti ti-edit"></i> Edit</a>
+
+                <form action="{{url('/delete/'. $blog->id)}}" method="post">
+                  @csrf
+                  <button class="btn btn-danger btn-sm"><i class="ti ti-x"></i> Delete</button>
+                </form>
+                
               </td>
             </tr>
             @endforeach
