@@ -69,7 +69,11 @@
                 <i class="ti ti-calendar-event"></i>
                 <span>{{optional($blog->created_at)->format('M j, Y')}}</span>
               </li>
-              
+              <li class="list-inline-item mt-2">—</li>
+            <li class="list-inline-item mt-2">
+              <i class="ti ti-clock"></i>
+              <span>{{caculateReadingTime("{$blog->description}")}} min read</span>
+            </li>
               
             </ul>
             <a class='d-block' href='{{urL("specific-blog/{$blog->id}")}}' title='The AGI hype train is running out of steam'>

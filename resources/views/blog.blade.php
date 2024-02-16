@@ -41,13 +41,13 @@
             <li class="list-inline-item mt-2">—</li>
             <li class="list-inline-item mt-2">
               <i class="ti ti-clock"></i>
-              <span>calculateReadingTime({{$blog->description}}) min read</span>
+              <span>{{caculateReadingTime("{$blog->description}")}} min read</span>
             </li>
           </ul>
           <a class='d-block' href='/qurno/blog-single' title='{{$blog->title}}'><h3 class="mb-3 post-title">
-          {{$blog->title}}
+          {{extractPara("{$blog->title}")}}
           </h3></a>
-          <p>{{$blog->description}}</p>
+          <p>{{extractPara("{$blog->description}")}}</p>
         </div>
         <div class="card-footer border-top-0 bg-transparent p-0">
           <ul class="card-meta list-inline">
