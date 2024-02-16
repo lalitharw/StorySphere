@@ -85,9 +85,9 @@
                                 <li class="nav-item {{(request()->url() == url("/"))?"active":""}}">
                                     <a class='nav-link' href='{{url("/")}}'>Home</a>
                                 </li>
-                                <li class="nav-item {{(request()->url()== url("/about"))?"active":""}}">
+                                {{-- <li class="nav-item {{(request()->url()== url("/about"))?"active":""}}">
                                     <a class='nav-link' href='{{url("about")}}'>About</a>
-                                </li>
+                                </li> --}}
                                 <li class="nav-item {{(request()->url()== url("/blogs"))?"active":""}}">
                                     <a class='nav-link' href='{{url("blogs")}}'>Blogs</a>
                                 </li>

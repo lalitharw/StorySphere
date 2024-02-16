@@ -8,8 +8,7 @@
           </div>
           <div class="col-lg-6 text-center text-lg-end">
             <ul class="list-inline footer-menu">
-              <li class="list-inline-item m-0"><a href='/qurno/privacy'>Privacy Policy</a></li>
-              <li class="list-inline-item m-0"><a href='/qurno/404-page'>404 Page</a></li>
+              <li class="list-inline-item m-0">Created By: <a href=''>Lalit Harwate</a></li>
             </ul>
           </div>
         </div>
@@ -33,14 +32,6 @@
   </script>
 
 {{-- script to calculate words to read --}}
-  <script>
-    function calculateReadingTime(words){
-      let averageReadingSpeed = 200
-
-      let readingTIme = words.length/averageReadingSpeed
-
-      console.log(readingTIme);
-    }
-  </script>
+ 
   
   </body></html>

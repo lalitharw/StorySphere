@@ -34,8 +34,8 @@
             @foreach ($blogs as $blog)
             <tr>
               <td ><h4>{{$blog->title}}</h4></td>
-              <td><a class="btn btn-primary btn-sm" href="{{ url('/edit/' . $blog->id) }}"><i class="ti ti-edit"></i> Edit</a>
-
+              <td class="d-flex gap-2 align-items-center"><a class="btn btn-primary btn-sm" href="{{ url('/edit/' . $blog->id) }}"><i class="ti ti-edit"></i> Edit</a>
+                
                 <form action="{{url('/delete/'. $blog->id)}}" method="post">
                   @csrf
                   <button class="btn btn-danger btn-sm"><i class="ti ti-x"></i> Delete</button>
@@ -49,4 +49,25 @@
    </div>
     </div>
   </section>
+@endsection
+
+@section("scripts")
+
+@if(Session::has("message"))
+Toastify({
+  text: "{{Session::get('message')}}",
+  duration: 3000,
+  close: true,
+  gravity: "top", // `top` or `bottom`
+  position: "center", // `left`, `center` or `right`
+  stopOnFocus: true, // Prevents dismissing of toast on hover
+  style: {
+    background: "linear-gradient(to right, #f08e80, #f08e80)",
+    color:"#fff",
+   
+  },
+  
+}).showToast();
+    
+@endif
 @endsection

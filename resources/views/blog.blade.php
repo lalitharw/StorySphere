@@ -59,8 +59,12 @@
             <li class="list-inline-item mt-2">•</li>
             <li class="list-inline-item mt-2">
               <ul class="card-meta-tag list-inline">
-                <li class="list-inline-item small"><a href='/qurno/tag-single'>Work</a></li>
-                <li class="list-inline-item small"><a href='/qurno/tag-single'>Lifestyle</a></li>
+                {{-- {{explode(",",$blog->tag)}} --}}
+                @foreach (explode(',',$blog->tags) as $tag)
+                <li class="list-inline-item small"><a href='{{$tag}}'>{{$tag}}</a></li>
+                
+                @endforeach
+               
               </ul>
             </li>
           </ul>

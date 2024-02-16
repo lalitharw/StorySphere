@@ -109,4 +109,24 @@
 })
 </script>
 
+
+
+@if(Session::has("message"))
+Toastify({
+  text: "{{Session::get('message')}}",
+  duration: 3000,
+  close: true,
+  gravity: "top", // `top` or `bottom`
+  position: "center", // `left`, `center` or `right`
+  stopOnFocus: true, // Prevents dismissing of toast on hover
+  style: {
+    background: "linear-gradient(to right, #f08e80, #f08e80)",
+    color:"#fff",
+   
+  },
+  
+}).showToast();
+    
+@endif
+
 @endsection

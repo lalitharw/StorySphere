@@ -13,16 +13,6 @@ class BlogsController extends Controller
     public function home(Request $request){
         $tags = Tag::all();
         $blogs = blogs::with("author","user")->where("is_featured","=",1)->limit(6)->get();
-        
-        
-        // return $blogs;
-        
-        foreach($blogs as $blog){
-            $he = $blog->tags;
-        }
-        $tag_array = explode(",",$he);
-        
-
         $data = "";
         if(Session()->has("loginid")){
             $user = Session()->get("loginid");
@@ -31,8 +21,7 @@ class BlogsController extends Controller
         }
     
 
-        return view("index",compact('blogs',"tags",'tag_array'));
-        // return response()->json(['data'=>$data]);
+        return view("index",compact('blogs',"tags"));
     }
 
     public function SingleBlogs($id){
@@ -54,7 +43,6 @@ class BlogsController extends Controller
     public function authorInfo($id){
         $author_info = author::with("user")->where("id",$id)->first();
         $blogs = blogs::where("authorid",$author_info->id)->get();
-        // return response($author_info);
         return view("author-single",compact("blogs","author_info"));
     }
 
@@ -72,9 +60,6 @@ class BlogsController extends Controller
     }
 
     public function storePublishBlog(Request $request){
-
-       
-
         $author_id = Session()->get("is_author");
         $user = Session()->get("loginid");
         
@@ -87,8 +72,6 @@ class BlogsController extends Controller
             $blog->userid = $user->id;
             // return $blog;
             $res =  $blog->save();
-
-
             if($res){
                 return redirect("/")->with("message",'Blog Published SuccessFully');
             }
@@ -116,21 +99,17 @@ class BlogsController extends Controller
 
     public function updateBlog($id,Request $request){
         $blog = blogs::find($id);
-        
         $blog->description = $request->desc;
-        // imploding the tag
         $blog->tags = implode(",",$request->tags);
-        
-        // return $blog;
         $blog->save();
+        return redirect()->back()->with("message","Blog updated Successfully");
         
     }
 
     public function deleteBlog($id){
-        $blog = blogs::find($id)->delete();
-        return redirect()->back();
+        blogs::find($id)->delete();
+        return redirect()->back()->with("message","Blog Deleted SuccessFully");
     }
-
 
     public function header(){
         $tags = Tag::all();
@@ -147,9 +126,4 @@ class BlogsController extends Controller
         $name = $request->file("image")->storeAs("public/upload",$filename);
         return "Photo uploaded at ".$name;
     }
-
-    // function to read first image and first para and set them as heading and thumbnail
-  
-
-
 }

@@ -16,7 +16,7 @@ use App\Http\Controllers\AuthController;
 */
 Route::get("/header",[BlogsController::class,"header"])->name("header");
 Route::get("/",[BlogsController::class,"home"])->name("home");
-Route::get("/about",[BlogsController::class,"about"])->name("about");
+// Route::get("/about",[BlogsController::class,"about"])->name("about");
 Route::get("/blogs",[BlogsController::class,"Blogs"])->name("blogs");
 Route::get("/author",[BlogsController::class,"authorInfo"])->name("authorinfo");
 Route::get("/login",[AuthController::class,"loginPage"])->name("login");
