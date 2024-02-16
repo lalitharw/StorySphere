@@ -34,6 +34,16 @@
 
             $readingTime = strlen($words) / $averageTime;
 
-            return round($readingTime);
+            return (int)($readingTime);
+        }
+    }
+
+    if(!function_exists("limitChar")){
+        function limitChar($htmlcontent){
+            $text = extractPara($htmlcontent);
+            $maxChars = 150;
+           
+            $limitedString = (strlen($text) > $maxChars) ? substr($text, 0, $maxChars) . '...' : $text;
+            return $limitedString;
         }
     }

@@ -13,9 +13,9 @@ class blogs extends Model
         'title',
         "description",
         "is_featured",
-        "tags",
+        "tag",
         "authorId",
-        'userid'
+        'userid',
     ];
 
     public function author(){
@@ -23,6 +23,10 @@ class blogs extends Model
     }
 
     public function user(){
-        return $this->belongsTo(User::class,"userid");
+        return $this->belongsTo(user::class,"userid");
+    }
+
+    public function tager(){
+        return $this->belongsTo(Tag::class,"tag");
     }
 }

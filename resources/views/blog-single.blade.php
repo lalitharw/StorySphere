@@ -74,8 +74,8 @@
         </div>
 
         <ul class="post-meta-tag list-unstyled list-inline mt-5">
-          <li class="list-inline-item">Tags: </li>
-          <li class="list-inline-item"><a class='bg-white' href='/qurno/tag-single'>Life</a></li>
+          <li class="list-inline-item">Tag: </li>
+         
           <li class="list-inline-item"><a class='bg-white' href='/qurno/tag-single'>Lighting</a></li>
         </ul>
       </div>
@@ -91,7 +91,7 @@
             </a>
             <div class="ms-0 ms-md-4 ps-0 ps-md-3 mt-4 mt-md-0">
               <h3 style="text-transform: capitalize" class="h4 mb-3"><a class='text-dark' href='/qurno/author-single'>{{$blogs->user->firstname}} {{$blogs->user->lastname}}  </a></h3>
-              <p>{{$blogs->description}}</p>
+              <p>{{$blogs->author->description}}</p>
               <div class="content"><a href='{{url("/author/{$blogs->authorId}")}}'>See all posts by this author <i class="ti ti-arrow-up-right"></i></a></div>
             </div>
           </div>
@@ -137,7 +137,7 @@
                       {{$footer->title}}
                     </h3>
                   </a>
-                  <p>{{$footer->description}}</p>
+                  <p>{{limitChar("{$footer->description}")}}</p>
                 </div>
                 <div class="card-footer border-top-0 bg-transparent p-0">
                   <ul class="card-meta list-inline">
@@ -149,7 +149,7 @@
                     <li class="list-inline-item mt-2">•</li>
                     <li class="list-inline-item mt-2">
                       <ul class="card-meta-tag list-inline">
-                        <li class="list-inline-item small"><a href='/qurno/tag-single'>Life</a></li>
+                        <li class="list-inline-item small"><a href='{{$footer->tager->id}}'>{{$footer->tager->tag_name}}</a></li>
                       </ul>
                     </li>
                   </ul>

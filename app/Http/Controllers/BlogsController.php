@@ -67,9 +67,10 @@ class BlogsController extends Controller
             $blog->title = "ew";
             $blog->description = $request->desc;
             // imploding the tag
-            $blog->tags = implode(",",$request->tags);
+            
             $blog->authorId = $author_id;
             $blog->userid = $user->id;
+            $blog->tag = $request->tag;
             // return $blog;
             $res =  $blog->save();
             if($res){
@@ -100,7 +101,7 @@ class BlogsController extends Controller
     public function updateBlog($id,Request $request){
         $blog = blogs::find($id);
         $blog->description = $request->desc;
-        $blog->tags = implode(",",$request->tags);
+        $blog->tag = $request->tag;
         $blog->save();
         return redirect()->back()->with("message","Blog updated Successfully");
         

@@ -36,15 +36,14 @@
                     <div class="row">
                       <div class="  col-md-6  mb-3">
                           <div class="form-group">
-                            <label for="Description">Select Tags:</label>
-                          <select name="tags[]" id="tags" multiple>
-                            @foreach ($tags as $tag)
-                            <option value="{{$tag->tag_id}}">{{$tag->tag_name}}</option>
-                            @endforeach
-                            
-                            
-                        </select>
-                          </div>
+                            <label for="tag">Select Tags:</label>
+                            <select name="tag" id="tag" class="form-select">
+                              <option value="">Select a tag</option>
+                              @foreach ($tags as $tag)
+                                  <option value="{{ $tag->id }}">{{ $tag->tag_name }}</option>
+                              @endforeach
+                          </select>
+                            </div>
                         </div>
 
                         <div class="col-md-12 mb-3">
@@ -53,16 +52,8 @@
                                 <textarea name="desc">
                                     Welcome to TinyMCE!
                                   </textarea>
-                                  
-                                  
                         </div>
                         </div>
-                        
-                            
-                         
-
-
-                        
                     </div>
 
                     </div>
@@ -93,20 +84,5 @@
     });
   </script>
 
-<script>
-  new MultiSelectTag('tags', {
-    rounded: true,    // default true
-    shadow: true,      // default false
-    placeholder: 'Search Tags',  // default Search...
-    tagColor: {
-        textColor: '#327b2c',
-        borderColor: '#92e681',
-        bgColor: '#eaffe6',
-    },
-    onChange: function(values) {
-        console.log(values)
-    }
-})
-</script>
 
 @endsection

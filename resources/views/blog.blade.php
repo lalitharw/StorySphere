@@ -47,24 +47,19 @@
           <a class='d-block' href='/qurno/blog-single' title='{{$blog->title}}'><h3 class="mb-3 post-title">
           {{extractPara("{$blog->title}")}}
           </h3></a>
-          <p>{{extractPara("{$blog->description}")}}</p>
+          <p>{{limitChar("{$blog->description}")}}</p>
         </div>
         <div class="card-footer border-top-0 bg-transparent p-0">
           <ul class="card-meta list-inline">
             <li class="list-inline-item mt-2">
               <a class='card-meta-author' href='/qurno/author-single' title='Read all posts by - {{$blog->user->firstname}} {{$blog->user->lastname}}'>
-                <img class="w-auto" src="{{asset('storage'.$blog->author->avatar)}}" alt="Chris Impey" width="26" height="26"> by <span>{{$blog->user->firstname}} {{$blog->user->lastname}}</span>
+                <img class="w-auto" src="{{asset('storage'.$blog->author->avatar)}}"  width="26" height="26"> by <span>{{$blog->user->firstname}} {{$blog->user->lastname}}</span>
               </a>
             </li>
             <li class="list-inline-item mt-2">•</li>
             <li class="list-inline-item mt-2">
               <ul class="card-meta-tag list-inline">
-                {{-- {{explode(",",$blog->tag)}} --}}
-                @foreach (explode(',',$blog->tags) as $tag)
-                <li class="list-inline-item small"><a href='{{$tag}}'>{{$tag}}</a></li>
-                
-                @endforeach
-               
+                <li class="list-inline-item small"><a href='{{$blog->tager->id}}'>{{$blog->tager->tag_name}}</a></li>
               </ul>
             </li>
           </ul>

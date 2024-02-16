@@ -79,11 +79,11 @@
             <a class='d-block' href='{{urL("specific-blog/{$blog->id}")}}' title='The AGI hype train is running out of steam'>
               <h3 class="mb-3 post-title">
                 {{-- custom helper function --}}
-               {{extractPara("{$blog->title}")}}
+               {{limitChar("{$blog->title}")}}
                
               </h3>
             </a>
-            <p>The AGI hype train has hit some heavy traffic. While futurists and fundraisers used to make bullish predictions about artificial general intelligence, …</p>
+            <p>{{limitChar("{$blog->description}")}}</p>
           </div>
           <div class="card-footer border-top-0 bg-transparent p-0">
             <ul class="card-meta list-inline">
@@ -95,10 +95,10 @@
               <li class="list-inline-item mt-2">•</li>
               <li class="list-inline-item mt-2">
                 <ul class="card-meta-tag list-inline">
-                    @foreach ($tag_array as $tag_arr)
-                  <li class="list-inline-item small"><a href='/qurno/tag-single'>{{$tag_arr}}</a></li>
+                   
+                  <li class="list-inline-item small"><a href='/qurno/tag-single'>{{$blog->tager->tag_name}}</a></li>
                       
-                    @endforeach
+                    
 
                 </ul>
               </li>
