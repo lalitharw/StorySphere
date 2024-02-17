@@ -15,11 +15,17 @@
     <div class="form-group">
       <label for="email">Email address:</label>
       <input type="email" name="email" class="form-control" placeholder="Enter email" id="email">
+      @error("email")
+        <p class="text-danger">{{$message}}</p>
+      @enderror
     </div>
     <br>
     <div class="form-group">
       <label for="pwd">Password:</label>
       <input type="password" name="password" class="form-control" placeholder="Enter password" id="pwd">
+      @error("password")
+        <p class="text-danger">{{$message}}</p>
+      @enderror
     </div>
     <br>
     <button type="submit" class="btn btn-primary mb-2">Submit</button>

@@ -39,7 +39,7 @@
                             <div class="  col-md-6  mb-3">
                                 <div class="form-group">
                                     <label for="title">Title:</label>
-                                    <input type="text" class="form-control" name="title" id="">
+                                    <input type="text" value="{{old("title")}}" class="form-control" name="title" id="">
                                 </div>
                                 @error('title')
                                 <div class="text-danger" role="alert">
@@ -58,7 +58,7 @@
                                 <select name="tag" id="tag" class="form-select">
                                     <option value="">Select a tag</option>
                                     @foreach ($tags as $tag)
-                                        <option class="form-control" value="{{ $tag->id }}">{{ $tag->tag_name }}
+                                        <option class="form-control" value="{{ $tag->id }}" >{{ $tag->tag_name }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -73,7 +73,8 @@
                         <div class="col-md-12 mb-3">
                             <div class="form-group">
                                 <label for="Description">Description:</label>
-                                <textarea name="description">
+                                <textarea  name="description">
+                                  {{old("description")}}
                                   </textarea>
                             </div>
                         </div>

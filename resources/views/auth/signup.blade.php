@@ -16,21 +16,23 @@
         <div class="col-md-6">
     <div class="form-group ">
         <label for="firstname">First Name:</label>
-        <input type="text" name="firstname" class="form-control" placeholder="Enter First Name" id="firstname">
+        <input type="text" value="{{old("firstname")}}" name="firstname" class="form-control" placeholder="Enter First Name" id="firstname">
       </div>
+      @error("firstname")
+        <p class="text-danger">{{$message}}</p>
+      @enderror
         </div>
 
         <div class="col-md-6 ">
       <div class="form-group">
         <label for="lastname">Last Name:</label>
-        <input type="text" name="lastname" class="form-control" placeholder="Enter Last Name" id="lastname">
+        <input type="text" value="{{old("lastname")}}" name="lastname" class="form-control" placeholder="Enter Last Name" id="lastname">
       </div>
+      @error("lastname")
+      <p class="text-danger">{{$message}}</p>
+      @enderror
         </div>
     </div>
-
-    
-
-   
 
 
 <div class="row mb-4">
@@ -38,17 +40,22 @@
   <div class="col-md-6 ">
     <div class="form-group">
       <label for="email">Email address:</label>
-      <input type="email" name="email" class="form-control" placeholder="Enter email" id="email">
+      <input type="email" value="{{old("email")}}" name="email" class="form-control" placeholder="Enter email" id="email">
     </div>
+    @error("email")
+    <p class="text-danger">{{$message}}</p>
+    @enderror
   </div>
+
+
     <div class="col-md-6" >
-    
-
-
     <div class="form-group">
       <label for="pwd">Password:</label>
-      <input type="password" class="form-control" placeholder="Enter password" id="pwd">
+      <input type="password" name="password" class="form-control" placeholder="Enter password" id="pwd">
     </div>
+    @error('password')
+    <p class="text-danger">{{$message}}</p>
+    @enderror
 </div>
 
 
@@ -56,8 +63,11 @@
 <div class="col-md-6">
     <div class="form-group">
         <label for="cpwd">Confirm Password:</label>
-        <input type="password" class="form-control" placeholder="Enter password again" id="cpwd">
+        <input type="password" name="passwordConfirmation" class="form-control" placeholder="Enter password again" id="cpwd">
       </div>
+      @error("passwordConfirmation")
+      <p class="text-danger">{{$message}}</p>
+      @enderror
     </div>
 </div>
     <button type="submit" class="btn btn-primary w-25 mb-2">Submit</button>

@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\user;
 use App\Models\Author;
-use Illuminate\Contracts\Session\Session;
 
 class AuthController extends Controller
 {
@@ -19,6 +18,14 @@ class AuthController extends Controller
     }
 
     public function storeSignup(Request $request){
+    $request->validate([
+        "firstname" => "required",
+        "lastname" => "required",
+        "email" => "required|email|unique:users,email",
+        "password"=> "required",
+        "passwordConfirmation" => "required|min:8|confirmed:passwordConfirmation"
+    ]);
+
         $user = new user();
         $user->firstname = $request->firstname;
         $user->lastname= $request->lastname;
@@ -45,20 +52,22 @@ class AuthController extends Controller
     }
 
     public function loginUser(Request $request){
+
+        $request->validate([
+            "email" => "required|email",
+            "password" => "required"
+        ]);
         // $author_id = 0;
         $user = user::where("email","=",$request->email)->first();
-        $author_id = Author::where("user_id",$user->id)->first();
-        $is_author = $author_id->id ?? False;
-        // return $is_author;
-        // return $is_author;
-        // return response([$user,$author_id]);
         if($user){
-            
-            if(!Hash::check($request->password,$user->password)){
-                // if($is_admin){
-                //     return redirect("/admin");
-                // }
-               
+        $author_id = Author::where("user_id",$user->id)->first();
+        $is_author = $author_id->id ?? 1;
+        }
+       
+        
+        if($user){
+          
+            if(Hash::check($request->password,$user->password)){
                 if($is_author){
                 $request->Session()->put(["loginid"=>$user,"is_author"=>$is_author]);
                 }
@@ -69,10 +78,8 @@ class AuthController extends Controller
 
             }
             else{
-                return back()->with("message","User not found");
+                return back()->with("message","Email or Password is Invalid!");
             }
-            // $pass = !Hash::check($request->password,$user->password);
-            //     return response()->json(['pass'=>$pass]);
         }
         else{
             return back()->with("message","User not found");
@@ -81,9 +88,7 @@ class AuthController extends Controller
 
     public function logout(){
         if(Session()->has("loginid")){
-            // Session()->pull("loginid");
             Session()->flush();
-            // will delete all session 
             return redirect()->route("login");
         }
     }
@@ -100,10 +105,7 @@ class AuthController extends Controller
     }
 
     public function storeAuthor(Request $request){
-
-
         $author = new Author();
-
         if(session()->has("loginid")){
         $user = Session()->get("loginid");
         $user_id = $user->id;
@@ -112,8 +114,6 @@ class AuthController extends Controller
             $user = Session()->get("signid");
             $user_id = $user->id;
         }
-        
-
         $filename = time()."author.".$request->file("avatar")->getClientOriginalExtension();
         $author->avatar = $request->file("avatar")->store("uploads");
         $author->description = $request->desc;
@@ -136,9 +136,6 @@ class AuthController extends Controller
         else{
             return back()->with("message","something went wrong");
         }
-
-       
-
         return view("auth.authorPage");
 
     }
