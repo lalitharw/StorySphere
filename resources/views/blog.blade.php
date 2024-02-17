@@ -59,7 +59,7 @@
             <li class="list-inline-item mt-2">•</li>
             <li class="list-inline-item mt-2">
               <ul class="card-meta-tag list-inline">
-                <li class="list-inline-item small"><a href='{{$blog->tager->id}}'>{{$blog->tager->tag_name}}</a></li>
+                <li class="list-inline-item small"><a href='{{url("/tag/".$blog->tager->id)}}'>{{$blog->tager->tag_name}}</a></li>
               </ul>
             </li>
           </ul>

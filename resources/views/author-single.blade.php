@@ -55,7 +55,7 @@
               {{-- {{extractPara("{$blog->description}")}} --}}
             </h3>
           </a>
-          <p>{{extractPara("{$blog->description}")}}</p>
+          <p>{{limitChar("{$blog->description}")}}</p>
         </div>
         <div class="card-footer border-top-0 bg-transparent p-0">
           <ul class="card-meta list-inline">
@@ -67,7 +67,7 @@
             <li class="list-inline-item mt-2">•</li>
             <li class="list-inline-item mt-2">
               <ul class="card-meta-tag list-inline">
-                <li class="list-inline-item small"><a href='/qurno/tag-single'>Machine</a></li>
+                <li class="list-inline-item small"><a href='{{url("/edit/{$blog->tager->id}")}}'>{{$blog->tager->tag_name}}</a></li>
               </ul>
             </li>
           </ul>
