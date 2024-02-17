@@ -62,19 +62,22 @@ class BlogsController extends Controller
     public function storePublishBlog(Request $request){
         $author_id = Session()->get("is_author");
         $user = Session()->get("loginid");
-        
+
+            $request->validate([
+                "title" => "required",
+                "tag" => "required",
+                "description"  => "required"
+            ]);
+
             $blog = new blogs();
-            $blog->title = "ew";
-            $blog->description = $request->desc;
-            // imploding the tag
-            
+            $blog->title = $request->title;
+            $blog->description = $request->description;
             $blog->authorId = $author_id;
             $blog->userid = $user->id;
             $blog->tag = $request->tag;
-            // return $blog;
             $res =  $blog->save();
             if($res){
-                return redirect("/")->with("message",'Blog Published SuccessFully');
+                return redirect("/manage")->with("message",'Blog Published SuccessFully');
             }
             else{
                 return back()->with("message","Something went wrong");
