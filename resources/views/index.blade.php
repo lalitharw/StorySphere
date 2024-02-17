@@ -61,7 +61,7 @@
           <div class="card-body">
             <a class='d-block' href='{{urL("specific-blog/{$blog->id}")}}' title='The AGI hype train is running out of steam'>
               <div class="post-image position-relative">
-                <img class="w-100 h-auto rounded" src="assets/images/blog/02.jpg" alt="The AGI hype train is running out of steam" width="970" height="500">
+                <img class="w-100 h-auto rounded" src="{{asset("/storage/{$blog->images}")}}" alt="The AGI hype train is running out of steam" width="970" height="500">
               </div>
             </a>
             <ul class="card-meta list-inline mb-3">

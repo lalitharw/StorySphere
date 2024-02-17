@@ -112,6 +112,12 @@ class BlogsController extends Controller
         return redirect()->back()->with("message","Blog Deleted SuccessFully");
     }
 
+    public function allTags(){
+        $tags = Tag::all();
+        
+        return view("tags",compact("tags"));
+    }
+
     public function CategoryTag($id){
         $blogs = blogs::where("tag",$id)->get();
         $tag_name = Tag::where("id",$id)->first();
@@ -125,6 +131,8 @@ class BlogsController extends Controller
         }
         return view("tag-single",compact("res","tag_name"));
     }
+
+   
 
     public function header(){
         $tags = Tag::all();

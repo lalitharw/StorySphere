@@ -44,7 +44,7 @@
               <span>{{caculateReadingTime("{$blog->description}")}} min read</span>
             </li>
           </ul>
-          <a class='d-block' href='/qurno/blog-single' title='{{$blog->title}}'><h3 class="mb-3 post-title">
+          <a class='d-block' href='{{url("/specific-blog/{$blog->id}")}}' title='{{$blog->title}}'><h3 class="mb-3 post-title">
           {{extractPara("{$blog->title}")}}
           </h3></a>
           <p>{{limitChar("{$blog->description}")}}</p>
@@ -52,7 +52,7 @@
         <div class="card-footer border-top-0 bg-transparent p-0">
           <ul class="card-meta list-inline">
             <li class="list-inline-item mt-2">
-              <a class='card-meta-author' href='/qurno/author-single' title='Read all posts by - {{$blog->user->firstname}} {{$blog->user->lastname}}'>
+              <a class='card-meta-author' href='{{url("/author/{$blog->author->id}")}}' title='Read all posts by - {{$blog->user->firstname}} {{$blog->user->lastname}}'>
                 <img class="w-auto" src="{{asset('storage'.$blog->author->avatar)}}"  width="26" height="26"> by <span>{{$blog->user->firstname}} {{$blog->user->lastname}}</span>
               </a>
             </li>

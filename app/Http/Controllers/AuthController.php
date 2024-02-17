@@ -49,12 +49,16 @@ class AuthController extends Controller
         $user = user::where("email","=",$request->email)->first();
         $author_id = Author::where("user_id",$user->id)->first();
         $is_author = $author_id->id ?? False;
-    
         // return $is_author;
         // return $is_author;
         // return response([$user,$author_id]);
         if($user){
+            
             if(!Hash::check($request->password,$user->password)){
+                // if($is_admin){
+                //     return redirect("/admin");
+                // }
+               
                 if($is_author){
                 $request->Session()->put(["loginid"=>$user,"is_author"=>$is_author]);
                 }

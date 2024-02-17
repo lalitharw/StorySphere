@@ -33,7 +33,7 @@
     <div class="col-lg-6">
       <article class="card post-card h-100 border-0 bg-transparent">
         <div class="card-body">
-          <a class='d-block' href='/qurno/blog-single' title='The AGI hype train is running out of steam'>
+          <a class='d-block' href='{{url("/specific-blog/{$blog->id}")}}' title='The AGI hype train is running out of steam'>
             <div class="post-image position-relative">
               <img class="w-100 h-auto rounded" src="{{extractImage("{$blog->description}")}}" alt="The AGI hype train is running out of steam" width="970" height="500">
             </div>
@@ -49,7 +49,7 @@
               <span>{{caculateReadingTime("{$blog->description}")}} min read</span>
             </li>
           </ul>
-          <a class='d-block' href='/qurno/blog-single' title='The AGI hype train is running out of steam'>
+          <a class='d-block' href='{{url("/specific-blog/{$blog->id}")}}'>
             <h3 class="mb-3 post-title">
               {{$blog->title}}
               {{-- {{extractPara("{$blog->description}")}} --}}
@@ -67,7 +67,7 @@
             <li class="list-inline-item mt-2">•</li>
             <li class="list-inline-item mt-2">
               <ul class="card-meta-tag list-inline">
-                <li class="list-inline-item small"><a href='{{url("/edit/{$blog->tager->id}")}}'>{{$blog->tager->tag_name}}</a></li>
+                <li class="list-inline-item small"><a href='{{url("/tag/{$blog->tager->id}")}}'>{{$blog->tager->tag_name}}</a></li>
               </ul>
             </li>
           </ul>

@@ -40,7 +40,7 @@ Route::get("/edit/{id}",[BlogsController::class,"editBlog"])->name("edit");
 Route::post("/edit/{id}",[BlogsController::class,"updateBlog"])->name("upateBlog");
 Route::post("/delete/{id}/",[BlogsController::class,"deleteBlog"]);
 Route::get("/tag/{id}/",[BlogsController::class,"CategoryTag"]);
-
+Route::get("/tags",[BlogsController::class,"allTags"]);
 // test controller to upload file
 Route::get("/upload",[BlogsController::class,"upload"])->name("upload");
 Route::post("/upload",[BlogsController::class,"uploadFunction"]);
