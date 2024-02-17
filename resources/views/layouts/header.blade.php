@@ -109,7 +109,7 @@
                                         <a class="dropdown-item" href="{{route("publish")}}"><i class="ti ti-notebook"></i> Publish New Blog</a>
                                         <a class="dropdown-item" href="{{url("manage")}}"><i class="ti ti-focus-centered"></i> Manage Blogs</a>
                                         <form action="{{ route('logout') }}" method="POST">
-                                            @csrf <!-- CSRF protection for POST requests -->
+                                            @csrf
                                             <button type="submit" class="dropdown-item btn btn-primary text-white">
                                                 <i class="ti ti-logout"></i> Logout
                                             </button>

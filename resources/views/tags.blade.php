@@ -29,7 +29,14 @@
       <a class='p-4 rounded bg-white d-block is-hoverable' href='{{url("/tag/{$tag->id}")}}'>
         <span class="h3"><i class="ti ti-tags mb-2"></i></span>
         <span class="h4 mt-2 mb-3 d-block"> {{$tag->tag_name}}</span>
-        {{-- Total {{$tag->tager_count}} posts --}}
+       @php
+          $blog = \App\Models\blogs::where("id",$tag->id)->count();
+       @endphp
+       Total {{$blog}} posts
+        
+        
+       
+        
       </a>
     </div>
     @endforeach

@@ -15,7 +15,7 @@
         </h1>
         <ul class="list-inline breadcrumb-menu mb-3">
           <li class="list-inline-item"><a href='{{url("/")}}'><i class="ti ti-home"></i>  <span>Home</span></a></li>
-          <li class="list-inline-item">• &nbsp; <a href='/qurno/tags'><span>Tags</span></a></li>
+          <li class="list-inline-item">• &nbsp; <a href='{{url("/tags")}}'><span>Tags</span></a></li>
           <li class="list-inline-item">• &nbsp; <a href='/qurno/tag-single'><span>{{$tag_name->tag_name}}</span></a></li>
         </ul>
       </div>

@@ -114,8 +114,14 @@ class BlogsController extends Controller
 
     public function allTags(){
         $tags = Tag::all();
+        $count = array();
+        foreach($tags as $tag){
+            $counter = blogs::where("tag",$tag->id)->count();
+            array_push($count, $counter);
+        }
         
-        return view("tags",compact("tags"));
+        // return $count;
+        return view("tags",compact("tags","count"));
     }
 
     public function CategoryTag($id){
