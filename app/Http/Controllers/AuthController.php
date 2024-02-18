@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\user;
 use App\Models\Author;
+use App\Models\blogs;
 
 class AuthController extends Controller
 {
@@ -58,6 +59,7 @@ class AuthController extends Controller
         ]);
         // $author_id = 0;
         $user = user::where("email","=",$request->email)->first();
+        $is_admin = $user->is_admin ?? 0;
         
         // if($user){
         // $author_id = Author::where("user_id",$user->id)->first();
@@ -71,6 +73,10 @@ class AuthController extends Controller
             $is_author = $author_id->id ?? 0;
             // return $is_author;
             if(Hash::check($request->password,$user->password)){
+
+                if($is_admin){
+                    return redirect("/admin");
+                }
                 if($is_author){
                 $request->Session()->put(["loginid"=>$user,"is_author"=>$is_author]);
                 }
@@ -118,7 +124,7 @@ class AuthController extends Controller
             $user_id = $user->id;
         }
         $filename = time()."author.".$request->file("avatar")->getClientOriginalExtension();
-        $author->avatar = $request->file("avatar")->store("uploads");
+        $author->avatar = $request->file("avatar")->storeAs("author_avatar",$filename);
         $author->description = $request->desc;
 
         // if not loginid session then use signid session
@@ -127,12 +133,9 @@ class AuthController extends Controller
        
         $res = $author->save();
 
-        if($res){
-            $request->session()->put("is_author",True);
-            return redirect("/");   
-        }
+       
 
-        else if($res){
+         if($res){
             
             return redirect("/login")->with("message","Author Details SuccessFul!! Login in");
         }
@@ -142,6 +145,8 @@ class AuthController extends Controller
         return view("auth.authorPage");
 
     }
+
+   
 
     
 }

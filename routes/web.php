@@ -46,3 +46,5 @@ Route::get("/tags",[BlogsController::class,"allTags"]);
 Route::get("/upload",[BlogsController::class,"upload"])->name("upload");
 Route::post("/upload",[BlogsController::class,"uploadFunction"]);
 
+
+// admin
