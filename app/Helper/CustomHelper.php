@@ -47,3 +47,18 @@
             return $limitedString;
         }
     }
+
+    if(!function_exists("removeFirstImage")){
+        function removeFirstImage($htmlcontent){
+            $dom = new DOMDocument();
+            $dom->loadHTML($htmlcontent);
+            $firstImage = $dom->getElementsByTagName("img");
+            if ($firstImage->length > 0) {
+                // Remove the first image
+                $firstImage->item(0)->parentNode->removeChild($firstImage->item(0));
+            }
+    
+            // Return the modified HTML content
+            return $dom->saveHTML();
+        }
+    }

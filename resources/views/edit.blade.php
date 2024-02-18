@@ -30,45 +30,63 @@
             <div class="col-12 ">
                 <h2>Publish Blog</h2>
                 
-                <form action="{{url("/edit/".$route)}}" method="POST">
-                    @csrf
-                    <div class="container-fluid">
-                    <div class="row">
-                      <div class="  col-md-6  mb-3">
-                          <div class="form-group">
-                            <label for="Description">Select Tags:</label>
-                          <select name="tags[]" id="tags" multiple>
-                            @foreach ($tags as $tag)
-                            <option value="{{$tag->tag_id}}" >{{$tag->tag_name}}</option>
-                            @endforeach
-                            
-                            
-                        </select>
+                <form action="{{url("/edit/{$route}") }}" method="POST">
+                  @csrf
+                  <div class="container-fluid">
+                      <div class="row">
+                          <div class="  col-md-6  mb-3">
+                              <div class="form-group">
+                                  <label for="title">Title:</label>
+                                  <input type="text" value="{{$blog->title}}" class="form-control" name="title" id="">
+                              </div>
+                              @error('title')
+                              <div class="text-danger" role="alert">
+                                  {{ $message }}
+                              </div>
+                          @enderror
                           </div>
-                        </div>
-
-                        <div class="col-md-12 mb-3">
-                            <div class="form-group">
-                                <label for="Description">Description:</label>
-                                <textarea name="desc">
-                                    {{$blog->description}}
-                                  </textarea>
-                                  
-                                  
-                        </div>
-                        </div>
-                        
-                            
-                         
+                          
 
 
-                        
-                    </div>
+                      </div>
 
-                    </div>
-                    <button type="submit" class="btn btn-primary w-25 mb-2 btn-sm-sm">Submit Blog</button>
+                      <div class="  col-md-6 mb-3">
+                          <div class="form-group">
+                              <label for="tag">Select Tags:</label>
+                              <select name="tag" id="tag" class="form-select">
+                                  <option value="">Select a tag</option>
+                                  @foreach ($tags as $tag)
+                                      <option class="form-control" value="{{ $tag->id }}" >{{ $tag->tag_name }}
+                                      </option>
+                                  @endforeach
+                              </select>
+                          </div>
+                          @error('tag')
+                              <div class="text-danger" role="alert">
+                                  {{ $message }}
+                              </div>
+                          @enderror
+                      </div>
 
-                </form>
+                      <div class="col-md-12 mb-3">
+                          <div class="form-group">
+                              <label for="Description">Description:</label>
+                              <textarea  name="description">
+                                {{$blog->description}}
+                                </textarea>
+                          </div>
+                      </div>
+                      @error('description')
+                              <div class="text-danger" role="alert">
+                                  {{ $message }}
+                              </div>
+                          @enderror
+                  </div>
+
+          </div>
+          <button type="submit" class="btn btn-primary w-25 mb-2 btn-sm-sm">Submit Blog</button>
+
+          </form>
             </div>
         </div>
     </div>
@@ -110,7 +128,7 @@
 </script>
 
 
-
+<script>
 @if(Session::has("message"))
 Toastify({
   text: "{{Session::get('message')}}",
@@ -126,7 +144,7 @@ Toastify({
   },
   
 }).showToast();
-    
+    </script>
 @endif
 
 @endsection

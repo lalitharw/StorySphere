@@ -77,7 +77,7 @@ class BlogsController extends Controller
             $blog->tag = $request->tag;
             $res =  $blog->save();
             if($res){
-                return redirect("/manage")->with("message",'Blog Published SuccessFully');
+                return redirect("/manageblog")->with("message",'Blog Published SuccessFully');
             }
             else{
                 return back()->with("message","Something went wrong");
@@ -89,9 +89,13 @@ class BlogsController extends Controller
         if(Session()->has("is_author")){
            $author_id = Session()->get("is_author");
             $blogs = blogs::where("authorId",$author_id)->get();
+            return response()->json(['data',$blogs]);
+            // return view("manageBlogs",compact("blogs"));
         }
-       
-        return view("manageBlogs",compact("blogs"));
+    }
+
+    public function manage(){
+        return view("manageBlogs");
     }
 
     public function editBlog($id){
@@ -103,16 +107,17 @@ class BlogsController extends Controller
 
     public function updateBlog($id,Request $request){
         $blog = blogs::find($id);
-        $blog->description = $request->desc;
+        $blog->description = $request->description;
+        $blog->title = $request->title;
         $blog->tag = $request->tag;
         $blog->save();
-        return redirect()->back()->with("message","Blog updated Successfully");
+        return redirect("/manageblog")->with("message","Blog updated Successfully");
         
     }
 
     public function deleteBlog($id){
         blogs::find($id)->delete();
-        return redirect()->back()->with("message","Blog Deleted SuccessFully");
+        return response()->json(["result"=>"Blog Deleted Successfully"]);
     }
 
     public function allTags(){

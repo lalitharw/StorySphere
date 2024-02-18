@@ -30,7 +30,7 @@
         <span class="h3"><i class="ti ti-tags mb-2"></i></span>
         <span class="h4 mt-2 mb-3 d-block"> {{$tag->tag_name}}</span>
        @php
-          $blog = \App\Models\blogs::where("id",$tag->id)->count();
+          $blog = \App\Models\blogs::where("tag",$tag->id)->count();
        @endphp
        Total {{$blog}} posts
         

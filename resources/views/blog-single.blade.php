@@ -26,14 +26,14 @@
             <li class="list-inline-item mt-2">—</li>
             <li class="list-inline-item mt-2">
               <i class="ti ti-calendar-event"></i>
-              <span>17 Nov, 2021</span>
+              <span>{{optional($blogs->created_at)->format('M j, Y')}}</span>
             </li>
           </ul>
         </div>
       </div>
       <div class="col-lg-12">
-        <div class="mb-5 text-center">
-          <img class="w-100 h-auto rounded" src="assets/images/blog/03.jpg" alt="What does it take to create an object that travels at 1% the speed of light?" width="970" height="500">
+        <div class="mb-5 text-center h-30">
+          <img class="w-100 h-60 rounded" style="object-fit:cover"  src="{{extractImage("{$blogs->description}")}}" alt="{{$blogs->title}}" width="970" height="500">
         </div>
       </div>
       <div class="col-lg-2 post-share-block order-1 order-lg-0 mt-5 mt-lg-0">
@@ -61,7 +61,7 @@
       
       <div class="col-lg-8 post-content-block order-0 order-lg-2">
         <div class="content">
-          <p>Light is fast. In fact, it is the fastest thing that exists, and a law of the universe is that nothing can move faster than light. Light travels at 186,000 miles per second (300,000 kilometers per second) and can go from the Earth to the Moon in just over a second. Light can streak from Los Angeles to New York in less than the blink of an eye.</p>
+          {{-- <p>Light is fast. In fact, it is the fastest thing that exists, and a law of the universe is that nothing can move faster than light. Light travels at 186,000 miles per second (300,000 kilometers per second) and can go from the Earth to the Moon in just over a second. Light can streak from Los Angeles to New York in less than the blink of an eye.</p>
           <p>While 1% of anything doesn’t sound like much, with light, that’s still really fast – close to 7 million miles per hour! At 1% the speed of light, it would take a little over a second to get from Los Angeles to New York. This is more than 10,000 times faster than a commercial jet.</p>
           <h3 id="why-even-1-of-light-speed-is-hard">Why even 1% of light speed is hard</h3>
           <p>What’s holding humanity back from reaching 1% of the speed of light? In a word, energy. Any object that’s moving has energy due to its motion. Physicists call this kinetic energy. To go faster, you need to increase kinetic energy. The problem is that it takes a lot of kinetic energy to increase speed. To make something go twice as fast takes four times the energy. Making something go three times as fast requires nine times the energy, and so on.</p>
@@ -70,13 +70,14 @@
           <h3 id="how-fast-can-we-go">How fast can we go?</h3>
           <p>It’s possible to get something to 1% the speed of light, but it would just take an enormous amount of energy. Could humans make something go even faster?</p>
           <p>Yes! But engineers need to figure out new ways to make things move in space. All rockets, even the sleek new rockets used by SpaceX and Blue Origins, burn rocket fuel that isn’t very different from gasoline in a car. The problem is that burning fuel is very inefficient.</p>
-          <p>Other methods for pushing a spacecraft involve using electric or magnetic forces. Nuclear fusion, the process that powers the Sun, is also much more efficient than chemical fuel.</p>
+          <p>Other methods for pushing a spacecraft involve using electric or magnetic forces. Nuclear fusion, the process that powers the Sun, is also much more efficient than chemical fuel.</p> --}}
+            {!!removeFirstImage($blogs->description)!!}
         </div>
 
         <ul class="post-meta-tag list-unstyled list-inline mt-5">
           <li class="list-inline-item">Tag: </li>
          
-          <li class="list-inline-item"><a class='bg-white' href='/qurno/tag-single'>Lighting</a></li>
+          <li class="list-inline-item"><a class='bg-white' href='{{url("/tag/{$blogs->tager->id}")}}'>{{$blogs->tager->tag_name}}</a></li>
         </ul>
       </div>
     </div>
@@ -86,7 +87,7 @@
       <div class="row justify-content-center">
         <div class="col-lg-10">
           <div class="d-block d-md-flex">
-            <a href='/qurno/author-single'>
+            <a href='{{url("/author/{$blogs->author->authorid}")}}'>
               <img class="rounded mr-4" src="assets/images/author/thomas-macaulay.jpg" alt="{{$blogs->user->firstname}} {{$blogs->user->lastname}}" width="155" height="155">
             </a>
             <div class="ms-0 ms-md-4 ps-0 ps-md-3 mt-4 mt-md-0">
@@ -118,13 +119,13 @@
                 <div class="card-body">
                   <a class='d-block' href='{{url("specific-blog/{$footer->id}")}}' title='{{$footer->title}}'>
                     <div class="post-image position-relative">
-                      <img class="w-100 h-auto rounded" src="assets/images/blog/04.jpg" alt="{{$footer->title}}" width="970" height="500">
+                      <img class="w-100 h-100 rounded" src="{{extractImage("{$footer->description}")}}" alt="{{$footer->title}}" width="970" height="500">
                     </div>
                   </a>
                   <ul class="card-meta list-inline mb-3">
                     <li class="list-inline-item mt-2">
                       <i class="ti ti-calendar-event"></i>
-                      <span>16 Nov, 2021</span>
+                      <span>{{optional($footer->created_at)->format('M j , Y')}}</span>
                     </li>
                     <li class="list-inline-item mt-2">—</li>
                     <li class="list-inline-item mt-2">

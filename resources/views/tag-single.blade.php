@@ -28,9 +28,9 @@
     <div class="col-lg-6">
       <article class="card post-card h-100 border-0 bg-transparent">
         <div class="card-body">
-          <a class='d-block' href='/qurno/blog-single' title='How to hire a developer straight out of bootcamp — without getting burned'>
+          <a class='d-block' href='/qurno/blog-single' title=' {{$blog->title}}'>
             <div class="post-image position-relative">
-              <img class="w-100 h-auto rounded" src="assets/images/blog/07.jpg" alt="How to hire a developer straight out of bootcamp — without getting burned" width="970" height="500">
+              <img class="w-100 h-100 rounded" src="{{extractImage("{$blog->description}")}}" alt=" {{$blog->title}}" width="970" height="500">
             </div>
           </a>
           <ul class="card-meta list-inline mb-3">
@@ -44,9 +44,9 @@
               <span>{{caculateReadingTime("{$blog->description}")}} min read</span>
             </li>
           </ul>
-          <a class='d-block' href='/qurno/blog-single' title='How to hire a developer straight out of bootcamp — without getting burned'>
+          <a class='d-block' href='{{url("/specific-blog/{$blog->id}")}}' title=' {{$blog->title}}'>
             <h3 class="mb-3 post-title">
-              How to hire a developer straight out of bootcamp — without getting burned
+              {{$blog->title}}
             </h3>
           </a>
           <p>{{limitChar("{$blog->description}")}}

@@ -54,14 +54,14 @@
       </div>
     </div>
     <div class="row gy-5 gx-4 g-xl-5">
-      @if(count($blogs)>1)
+      @if(count($blogs)>0)
       @foreach ($blogs as $blog)
       <div class="col-lg-6">
         <article class="card post-card h-100 border-0 bg-transparent">
           <div class="card-body">
             <a class='d-block' href='{{urL("specific-blog/{$blog->id}")}}' title='The AGI hype train is running out of steam'>
               <div class="post-image position-relative">
-                <img class="w-100 h-auto rounded" src="{{asset("/storage/{$blog->images}")}}" alt="The AGI hype train is running out of steam" width="970" height="500">
+                <img class="w-100 h-100 rounded" src="{{extractImage("{$blog->description}")}}" alt="The AGI hype train is running out of steam" width="970" height="500">
               </div>
             </a>
             <ul class="card-meta list-inline mb-3">

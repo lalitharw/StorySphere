@@ -22,8 +22,8 @@ class AuthController extends Controller
         "firstname" => "required",
         "lastname" => "required",
         "email" => "required|email|unique:users,email",
-        "password"=> "required",
-        "passwordConfirmation" => "required|min:8|confirmed:passwordConfirmation"
+        "password"=> "required|min:8",
+        "passwordConfirmation" => "required"
     ]);
 
         $user = new user();
@@ -38,7 +38,6 @@ class AuthController extends Controller
             
             Session()->pull("redirect_to_author_page");
             
-            // return redirect()->route("author")->with("message","Registered Successfully!!");
             return view("auth.authorPage")->with("message","Registered Successfully! Fill your details");
         }
         else if($res){
@@ -59,14 +58,18 @@ class AuthController extends Controller
         ]);
         // $author_id = 0;
         $user = user::where("email","=",$request->email)->first();
-        if($user){
-        $author_id = Author::where("user_id",$user->id)->first();
-        $is_author = $author_id->id ?? 1;
-        }
+        
+        // if($user){
+        // $author_id = Author::where("user_id",$user->id)->first();
+        // $is_author = $author_id->id;
+        
+        // }
        
         
         if($user){
-          
+            $author_id = Author::where("user_id",$user->id)->first();
+            $is_author = $author_id->id ?? 0;
+            // return $is_author;
             if(Hash::check($request->password,$user->password)){
                 if($is_author){
                 $request->Session()->put(["loginid"=>$user,"is_author"=>$is_author]);

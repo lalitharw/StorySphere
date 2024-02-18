@@ -33,9 +33,9 @@
     <div class="col-lg-6">
       <article class="card post-card h-100 border-0 bg-transparent">
         <div class="card-body">
-          <a class='d-block' href='{{url("/specific-blog/{$blog->id}")}}' title='The AGI hype train is running out of steam'>
+          <a class='d-block' href='{{url("/specific-blog/{$blog->id}")}}' title='{{$blog->title}}'>
             <div class="post-image position-relative">
-              <img class="w-100 h-auto rounded" src="{{extractImage("{$blog->description}")}}" alt="The AGI hype train is running out of steam" width="970" height="500">
+              <img class="w-100 h-100 rounded" src="{{extractImage("{$blog->description}")}}" alt="{{$blog->title}}" width="970" height="500">
             </div>
           </a>
           <ul class="card-meta list-inline mb-3">

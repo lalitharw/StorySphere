@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>StorySphere - @yield("title")</title>
 
     <meta name="author" content="Platol">
@@ -50,8 +51,11 @@
                               <i  class="text-dark fs-1 ti ti-user-circle"></i>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                @if(Session::has("is_author"))
+                                   
                                 <a class="dropdown-item" href="{{route("publish")}}"><i class="ti ti-notebook"></i> Publish New Blog</a>
-                                <a class="dropdown-item" href="{{url("manage")}}"><i class="ti ti-focus-centered"></i> Manage Blogs</a>
+                                <a class="dropdown-item" href="{{url("manageblog")}}"><i class="ti ti-focus-centered"></i> Manage Blogs</a>
+                                @endif
                                 <form action="{{ route('logout') }}" method="POST">
                                     @csrf <!-- CSRF protection for POST requests -->
                                     <button type="submit" class="dropdown-item btn btn-primary text-white">
@@ -106,8 +110,10 @@
                                         <i  class="text-dark fs-1 ti ti-user-circle"></i>
                                       </a>
                                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        @if(Session::has("is_author"))
                                         <a class="dropdown-item" href="{{route("publish")}}"><i class="ti ti-notebook"></i> Publish New Blog</a>
-                                        <a class="dropdown-item" href="{{url("manage")}}"><i class="ti ti-focus-centered"></i> Manage Blogs</a>
+                                        <a class="dropdown-item" href="{{url("manageblog")}}"><i class="ti ti-focus-centered"></i> Manage Blogs</a>
+                                        @endif
                                         <form action="{{ route('logout') }}" method="POST">
                                             @csrf
                                             <button type="submit" class="dropdown-item btn btn-primary text-white">

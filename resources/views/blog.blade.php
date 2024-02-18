@@ -30,7 +30,7 @@
         <div class="card-body">
           <a class='d-block' href='{{ url("/specific-blog/{$blog->id}")}}' title='{{$blog->title}}'>
             <div class="post-image position-relative">
-              <img class="w-100 h-auto rounded" src="assets/images/blog/08.jpg" alt="{{$blog->title}}" width="970" height="500">
+              <img class="w-80 h-100 rounded" src="{{extractImage("{$blog->description}")}}" alt="{{$blog->title}}" width="970" height="500">
             </div>
           </a>
           <ul class="card-meta list-inline mb-3">

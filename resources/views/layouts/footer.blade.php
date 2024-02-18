@@ -27,9 +27,7 @@
   <script src="{{url("assets/js/script.js")}}"></script>
 
 
-  <script>
     @yield("scripts")
-  </script>
 
 {{-- script to calculate words to read --}}
  
