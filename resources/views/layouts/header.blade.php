@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
     <meta name="description" content="Minimal Blog HTML Template">
 
-    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset("assets/images/logo-favicon.png")}}" type="image/x-icon">
 
     <!-- CSS Plugins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,7 +40,7 @@
                     <nav class="navbar navbar-expand-lg navbar-light p-0">
                         <!-- logo -->
                         <a class='navbar-brand font-weight-bold mb-0' href='{{route("home")}}' title='Qurno'>
-                            <img class="img-fluid" width="110" height="35" src="{{url('assets/images/logo.png')}}" alt="Qurno">
+                            <img class="img-fluid" width="150" height="40" src="{{url('assets/images/StorySphere.png')}}" alt="Qurno">
                         </a>
 
                         

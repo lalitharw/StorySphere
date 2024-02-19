@@ -56,7 +56,7 @@
                               <select name="tag" id="tag" class="form-select">
                                   <option value="">Select a tag</option>
                                   @foreach ($tags as $tag)
-                                      <option class="form-control" value="{{ $tag->id }}" >{{ $tag->tag_name }}
+                                      <option class="form-control" value="{{ $tag->id }}">{{ $tag->tag_name }}
                                       </option>
                                   @endforeach
                               </select>
