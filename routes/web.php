@@ -19,10 +19,7 @@ Route::get("/",[BlogsController::class,"home"])->name("home");
 // Route::get("/about",[BlogsController::class,"about"])->name("about");
 Route::get("/blogs",[BlogsController::class,"Blogs"])->name("blogs");
 Route::get("/author",[BlogsController::class,"authorInfo"])->name("authorinfo");
-Route::get("/login",[AuthController::class,"loginPage"])->name("login");
-Route::get("/signup",[AuthController::class,"signUpPage"])->name("signup");
-Route::post("/register",[AuthController::class,"storeSignup"])->name("register");
-Route::post("/loginuser",[AuthController::class,'loginUser'])->name("loginuser");
+
 Route::post("/logout",[AuthController::class,"logout"])->name("logout");
 Route::get("/specific-blog/{id}",[BlogsController::class,"SingleBlogs"])->name("singleblog");
 Route::get("/author",[AuthController::class,"author"])->name("author");
@@ -48,3 +45,16 @@ Route::post("/upload",[BlogsController::class,"uploadFunction"]);
 
 
 // admin
+Route::middleware(['isAuthor'])->group(function(){
+    Route::get("/manage",[BlogsController::class,"manageBlog"])->name("manageBlog");
+    Route::get("/manageblog",[BlogsController::class,"manage"]);
+    Route::get("/publish",[BlogsController::class,"publishPage"])->name("publish");
+    Route::post("/storeblog",[BlogsController::class,"storePublishBlog"])->name("storeBlog");
+});
+
+Route::middleware(['isLogged'])->group(function(){
+    Route::get("/login",[AuthController::class,"loginPage"])->name("login");
+Route::get("/signup",[AuthController::class,"signUpPage"])->name("signup");
+Route::post("/register",[AuthController::class,"storeSignup"])->name("register");
+Route::post("/loginuser",[AuthController::class,'loginUser'])->name("loginuser");
+});
