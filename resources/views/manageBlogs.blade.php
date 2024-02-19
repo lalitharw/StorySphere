@@ -22,7 +22,7 @@
   </section>
     <div class="container">
     
-      <div class="row gy-5 gx-4 g-xl-5">
+      <div class="content1 row gy-5 gx-4 g-xl-5">
         <table class="table p-1">
           <thead>
             <tr>
@@ -61,10 +61,14 @@
             method: "GET",
             dataType: "json",
             success: function(data) {
+              let content = '';
                 if(data){
-
-                  console.log(data[1]);
-                  let content = '';
+                  if(data[1].length === 0){
+                    $("table").hide();
+                    $(".content1").html(`<div class=" d-flex justify-content-center text-center flex-column "><h2 class="text-center">No Blogs Added</h2>  <div><a href="publish" class="text-center btn btn-primary w-25">Publish Blog</a></div></div>`);
+                  }
+                  // console.log(data[1]);
+                  else{
                   for(let i=0;i<data[1].length;i++){
                     var editUrl = "{{ url("/edit/") }}" +"/" + (data[1][i]['id']);
                     var deleteUrl = "{{url("/delete/")}}" +"/"+ (data[1][i]['id']);
@@ -80,6 +84,7 @@
             </tr>
                       `
                   }
+                }
                   $("tbody").html(content)
                 }
             },

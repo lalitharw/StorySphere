@@ -27,7 +27,7 @@
     @foreach ($tags as $tag)
     <div class="col-lg-4 col-sm-6">
       <a class='p-4 rounded bg-white d-block is-hoverable' href='{{url("/tag/{$tag->id}")}}'>
-        <span class="h3"><i class="ti ti-tags mb-2"></i></span>
+        <span class="h3"><i class="ti ti-{{$tag->iconName}} mb-2"></i></span>
         <span class="h4 mt-2 mb-3 d-block"> {{$tag->tag_name}}</span>
        @php
           $blog = \App\Models\blogs::where("tag",$tag->id)->count();

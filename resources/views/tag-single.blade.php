@@ -22,8 +22,10 @@
     </div>
   </div>
 </section>
+
 <div class="container">
   <div class="row gy-5 gx-4 g-xl-5">
+    @if(count($res)>0)
     @foreach($res as $blog)
     <div class="col-lg-6">
       <article class="card post-card h-100 border-0 bg-transparent">
@@ -70,6 +72,9 @@
       </article>
     </div>
     @endforeach
+    @else
+    <h2 class="text-center">No Blogs Found</h2>
+    @endif
     
   </div>
 </div>

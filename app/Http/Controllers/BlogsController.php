@@ -12,7 +12,7 @@ class BlogsController extends Controller
 {
     public function home(Request $request){
         $tags = Tag::all();
-        $blogs = blogs::with("author","user")->where("is_featured","=",1)->limit(6)->get();
+        $blogs = blogs::with("author","user")->take(6)->get();
         $data = "";
         if(Session()->has("loginid")){
             $user = Session()->get("loginid");
