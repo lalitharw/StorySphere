@@ -24,19 +24,22 @@ Route::post("/logout",[AuthController::class,"logout"])->name("logout");
 Route::get("/specific-blog/{id}",[BlogsController::class,"SingleBlogs"])->name("singleblog");
 Route::get("/author",[AuthController::class,"author"])->name("author");
 Route::post("/authorStore",[AuthController::class,"storeAuthor"])->name("authorStore");
-Route::get("/publish",[BlogsController::class,"publishPage"])->name("publish");
-Route::post("/storeblog",[BlogsController::class,"storePublishBlog"])->name("storeBlog");
+
 
 // single author route
 Route::get("/author/{id}",[BlogsController::class,"authorInfo"])->name("authorInfo");
 
-// route for author managing their blogs
-Route::get("/manage",[BlogsController::class,"manageBlog"])->name("manageBlog");
-Route::get("/manageblog",[BlogsController::class,"manage"]);
 
-Route::get("/edit/{id}",[BlogsController::class,"editBlog"])->name("edit");
+
+// middleware added for crud blog for author
+Route::middleware(['blogcrud'])->group(function(){
+    Route::get("/edit/{id}",[BlogsController::class,"editBlog"])->name("edit");
 Route::post("/edit/{id}",[BlogsController::class,"updateBlog"])->name("upateBlog");
 Route::post("/delete/{id}/",[BlogsController::class,"deleteBlog"]);
+});
+
+
+
 Route::get("/tag/{id}/",[BlogsController::class,"CategoryTag"]);
 Route::get("/tags",[BlogsController::class,"allTags"]);
 // test controller to upload file
@@ -44,7 +47,8 @@ Route::get("/upload",[BlogsController::class,"upload"])->name("upload");
 Route::post("/upload",[BlogsController::class,"uploadFunction"]);
 
 
-// admin
+
+// group middleware when user is normal user is not an author
 Route::middleware(['isAuthor'])->group(function(){
     Route::get("/manage",[BlogsController::class,"manageBlog"])->name("manageBlog");
     Route::get("/manageblog",[BlogsController::class,"manage"]);
@@ -52,6 +56,8 @@ Route::middleware(['isAuthor'])->group(function(){
     Route::post("/storeblog",[BlogsController::class,"storePublishBlog"])->name("storeBlog");
 });
 
+
+//group middleware when user is already not logged in to website
 Route::middleware(['isLogged'])->group(function(){
     Route::get("/login",[AuthController::class,"loginPage"])->name("login");
 Route::get("/signup",[AuthController::class,"signUpPage"])->name("signup");

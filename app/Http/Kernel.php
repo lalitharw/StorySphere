@@ -47,6 +47,8 @@ class Kernel extends HttpKernel
         "isAuthor" => [\App\Http\Middleware\isAuthorMiddleware::class],
 
         "isLogged" => [\App\Http\Middleware\isLoggedMiddlware::class],
+
+        "blogcrud" => [\App\Http\Middleware\blogcrudMiddleware::class],
         
     ];
 
