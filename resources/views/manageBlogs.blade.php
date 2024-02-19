@@ -80,7 +80,7 @@
             </tr>
                       `
                   }
-                  $("tbody").append(content)
+                  $("tbody").html(content)
                 }
             },
             error: function(xhr, status, error) {
@@ -101,7 +101,8 @@
     event.preventDefault(); // Prevent the default button click behavior
       let  mythis = $(this);
     let id = $(this).attr("data-sid");
-    console.log(id);
+    mydata = {sid:id}
+    // console.log(id);
     let csrfToken = $('meta[name="csrf-token"]').attr('content');
     $.ajax({
         url: "/delete/" + id ,// Construct the URL properly
@@ -110,10 +111,11 @@
         headers: {
             'X-CSRF-TOKEN': csrfToken // Include CSRF token in the headers
         },
+        data:JSON.stringify(mydata),
         success: function(data) {
           
-            $(mythis).closest("tr").fadeOut();
-            console.log("hello");
+             $(mythis).closest("tr").fadeOut();
+            // console.log("hello");
             showManageBlogs();
             
             Toastify({
@@ -140,7 +142,7 @@
 });
 
     </script>
-
+{{-- 
 <script>
 @if(Session::has("message"))
 Toastify({
@@ -157,6 +159,6 @@ Toastify({
   },
   
 }).showToast();
-    </script>
-@endif
+    </script> --}}
+{{-- @endif --}}
 @endsection
