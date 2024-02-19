@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\user;
 use App\Models\Author;
-use App\Models\blogs;
 
 class AuthController extends Controller
 {
@@ -24,7 +23,9 @@ class AuthController extends Controller
         "lastname" => "required",
         "email" => "required|email|unique:users,email",
         "password"=> "required|min:8",
-        "passwordConfirmation" => "required"
+        "passwordConfirmation" => "required|same:password"
+    ],[
+        'passwordConfirmation.same' => "The confirm password must match the password field",
     ]);
 
         $user = new user();
