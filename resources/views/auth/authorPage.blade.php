@@ -38,6 +38,7 @@
 
 @section("scripts")
 
+<script>
 @if(Session::has("message"))
 Toastify({
   text: "{{Session::get('message')}}",
@@ -53,6 +54,6 @@ Toastify({
   },
   
 }).showToast();
-    
+</script>    
 @endif
 @endsection

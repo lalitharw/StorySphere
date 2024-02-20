@@ -115,6 +115,11 @@ class AuthController extends Controller
     }
 
     public function storeAuthor(Request $request){
+       
+
+        
+
+
         $author = new Author();
         if(session()->has("loginid")){
         $user = Session()->get("loginid");
@@ -125,6 +130,7 @@ class AuthController extends Controller
             $user_id = $user->id;
         }
         $filename = time()."author.".$request->file("avatar")->getClientOriginalExtension();
+        
         $author->avatar = $request->file("avatar")->storeAs("author_avatar",$filename);
         $author->description = $request->desc;
 
