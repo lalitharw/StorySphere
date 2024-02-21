@@ -115,10 +115,7 @@ class AuthController extends Controller
     }
 
     public function storeAuthor(Request $request){
-       
-
         
-
 
         $author = new Author();
         if(session()->has("loginid")){
@@ -129,9 +126,9 @@ class AuthController extends Controller
             $user = Session()->get("signid");
             $user_id = $user->id;
         }
-        $filename = time()."author.".$request->file("avatar")->getClientOriginalExtension();
+        $filename = uniqid()."_author.".$request->file("avatar")->getClientOriginalExtension();
         
-        $author->avatar = $request->file("avatar")->storeAs("author_avatar",$filename);
+        $author->avatar = $request->file("avatar")->storeAs("author_avatar",$filename,'public');
         $author->description = $request->desc;
 
         // if not loginid session then use signid session

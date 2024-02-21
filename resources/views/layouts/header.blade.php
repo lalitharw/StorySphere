@@ -40,20 +40,20 @@
                     <nav class="navbar navbar-expand-lg navbar-light p-0">
                         <!-- logo -->
                         <a class='navbar-brand font-weight-bold mb-0' href='{{route("home")}}' title='Qurno'>
-                            <img class="img-fluid" width="150" height="40" src="{{url('assets/images/StorySphere.png')}}" alt="Qurno">
+                            <img class="img-fluid" width="100" height="20" src="{{url('assets/images/StorySphere.png')}}" alt="Qurno">
                         </a>
 
                         
 
                         @if(Session::has("loginid"))
-                        <div class="dropdown  d-sm-inline-block d-lg-none ms-auto ">
+                        {{-- <div class=" dropdown  d-sm-inline-block d-lg-none ms-auto ">
                             <a class=" dropdown-toggle text-white" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               <i  class="text-dark fs-1 ti ti-user-circle"></i>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 @if(Session::has("is_author"))
                                    
-                                <a class="dropdown-item" href="{{route("publish")}}"><i class="ti ti-notebook"></i> Publish New Blog</a>
+                                <a class="dropdown-item" href="{{route("publish")}}"><i class="ti ti-notebook"></i> Publish New Blog mobile</a>
                                 <a class="dropdown-item" href="{{url("manageblog")}}"><i class="ti ti-focus-centered"></i> Manage Blogs</a>
                                 @endif
                                 <form action="{{ route('logout') }}" method="POST">
@@ -63,7 +63,12 @@
                                     </button>
                                 </form>
                               </div>
-                          </div>
+                          </div>  --}}
+                          <button class="search-toggle d-inline-block d-lg-none ms-auto me-1 me-sm-3" data-toggle="search" aria-label="Search Toggle">
+                            <span>Search</span>
+                            <i  class="text-dark fs-1 ti ti-user-circle"></i>
+                          </button>
+                          
                         @else
                         <a href="{{url("/login")}}" type="button" class=" d-inline-block d-lg-none ms-auto btn-sm  btn btn-primary text-white">Login</a>
                             
@@ -93,8 +98,25 @@
                                 <li class="nav-item {{(request()->url()== url("/author"))?"active":""}}">
                                     <a class='nav-link' href='{{url("author")}}'>Become an Author</a>
                                 </li>
+                                @else
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    @if(Session::has("is_author"))
+                                       
+                                    <a class="dropdown-item" href="{{route("publish")}}"><i class="ti ti-notebook"></i> Publish New Blog mobile</a>
+                                    <a class="dropdown-item" href="{{url("manageblog")}}"><i class="ti ti-focus-centered"></i> Manage Blogs</a>
+                                    @endif
+                                    <form action="{{ route('logout') }}" method="POST">
+                                        @csrf <!-- CSRF protection for POST requests -->
+                                        <button type="submit" class="dropdown-item btn btn-primary text-white">
+                                            <i class="ti ti-logout"></i> Logout
+                                        </button>
+                                    </form>
+                                  </div>
+                              </div>
+                              
                                
                                 @endif
+
 
                                
                             </ul>
@@ -135,4 +157,4 @@
         </div>
     </header>
 
-   
+        
